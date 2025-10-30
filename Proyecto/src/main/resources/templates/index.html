@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Corner - Inicio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="fas fa-coffee me-2"></i>Coffee Corner
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/menu}">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contacto}">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/ubicacion}">Ubicación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/galeria}">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/presentacion}">Presentación</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn language-selector dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe me-1"></i> Español
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Español</a></li>
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Français</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner-section">
+        <div class="container">
+            <div class="banner-content">
+                <h1 class="banner-title">Welcome to Coffee Corner</h1>
+                <p class="banner-subtitle">Bienvenido a nuestra cafetería</p>
+                <a th:href="@{/menu}" class="btn btn-menu">
+                    <i class="fas fa-utensils me-2"></i>Visitar nuestro menú
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">Nuestra Historia</h2>
+                    <p class="history-text">
+                        Coffee Corner nació en 2010 con la visión de crear un espacio acogedor donde la comunidad 
+                        pudiera reunirse, disfrutar de café de calidad y compartir momentos especiales. Nuestros 
+                        fundadores, apasionados por el café de especialidad, viajaron por diferentes regiones 
+                        cafetaleras para seleccionar los mejores granos.
+                    </p>
+                    <p class="history-text">
+                        Hoy, después de más de una década, mantenemos nuestro compromiso con la calidad y el servicio 
+                        excepcional. Cada taza de café que servimos cuenta una historia de dedicación, desde el cultivo 
+                        sostenible hasta el tostado artesanal.
+                    </p>
+                    <p class="history-text">
+                        En Coffee Corner no solo servimos café, creamos experiencias. Nuestro espacio está diseñado 
+                        para que te sientas como en casa, ya sea que vengas a trabajar, a reunirte con amigos o 
+                        simplemente a disfrutar de un momento de tranquilidad.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Nuestra Ubicación</h2>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9503398796587!2d-74.0059411243968!3d40.71277603833624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316e0f2f61%3A0x6d5c13e24eb9c81!2sTimes%20Square%2C%20Nueva%20York%2C%20NY%2010036%2C%20EE.%20UU.!5e0!3m2!1ses!2ses!4v1698765432100!5m2!1ses!2ses" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Nuestro Espacio</h2>
+            <div class="square-carousel">
+                <div id="coffeeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Interior de Coffee Corner">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Nuestro café especial">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Postres artesanales">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Ambiente acogedor">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="promotions-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Promociones Especiales</h2>
+            
+            <div class="row">
+                <!-- Promotion 1 -->
+                <div class="col-lg-12 mb-4">
+                    <div class="promo-card d-flex">
+                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Café del Día">
+                        <div class="promo-content flex-grow-1">
+                            <h3 class="promo-title">Café del Día + Pastel</h3>
+                            <p class="promo-desc">Disfruta de nuestro café especial del día acompañado de una rebanada de pastel casero. Perfecto para empezar la mañana con energía.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-coffee">$8.99</span>
+                                <button class="btn btn-add-cart">
+                                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Promotion 2 -->
+                <div class="col-lg-12 mb-4">
+                    <div class="promo-card d-flex">
+                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Combo Merienda">
+                        <div class="promo-content flex-grow-1">
+                            <h3 class="promo-title">Combo Merienda</h3>
+                            <p class="promo-desc">Dos cafés latte medianos y dos croissants de almendra. Ideal para compartir una tarde de conversación y buen café.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-coffee">$12.99</span>
+                                <button class="btn btn-add-cart">
+                                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Promotion 3 -->
+                <div class="col-lg-12 mb-4">
+                    <div class="promo-card d-flex">
+                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Tarde de Té">
+                        <div class="promo-content flex-grow-1">
+                            <h3 class="promo-title">Tarde de Té Especial</h3>
+                            <p class="promo-desc">Selección de tés premium acompañados de mini sándwiches y pastelitos. Una experiencia británica en Coffee Corner.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-coffee">$15.99</span>
+                                <button class="btn btn-add-cart">
+                                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-coffee me-2"></i>Coffee Corner</h5>
+                    <p>Tu rincón favorito para disfrutar del mejor café en un ambiente acogedor y relajante.</p>
+                    <div class="social-links">
+                        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Horario</h5>
+                    <p>Lunes a Viernes: 7:00 - 21:00</p>
+                    <p>Sábados: 8:00 - 22:00</p>
+                    <p>Domingos: 8:00 - 20:00</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Coffee Street, Ciudad</p>
+                    <p><i class="fas fa-phone me-2"></i>(123) 456-7890</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@coffeecorner.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Coffee Corner. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            console.log('Coffee Corner cargado correctamente');
+            
+            // Efecto suave para el carrusel
+            $('#coffeeCarousel').carousel({
+                interval: 4000,
+                pause: "hover"
+            });
+        });
+    </script>
+</body>
+</html>
