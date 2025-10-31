@@ -1,4 +1,4 @@
-package main.controller;
+package cafeteria.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

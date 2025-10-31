@@ -1,13 +1,13 @@
-package main;
+package cafeteria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoApplication {
+public class CafeteriaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoApplication.class, args);
+		SpringApplication.run(CafeteriaApplication.class, args);
 	}
 
 }
