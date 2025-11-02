@@ -1,4 +1,4 @@
-package cafeteria.controller;
+/*package cafeteria.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,4 +41,4 @@ public class MainController {
     public String presentacion() {
         return "presentacion"; // Para futura página de presentación
     }
-}
+}*/
