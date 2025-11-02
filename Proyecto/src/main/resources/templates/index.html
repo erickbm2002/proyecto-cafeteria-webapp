@@ -9,9 +9,9 @@
     <section class="banner-section">
         <div class="container">
             <div class="banner-content">
-                <h1 class="banner-title">Welcome to Coffee Corner</h1>
-                <p class="banner-subtitle">Bienvenido a nuestra cafetería</p>
-                <a th:href="@{/menu}" class="btn btn-menu">
+                <h1 class="banner-title">Bienvenido a Coffee Corner</h1>
+                <p class="banner-subtitle">¿Deseas un café?</p>
+                <a th:href="@{/menu/menu}" class="btn btn-menu">
                     <i class="fas fa-utensils me-2"></i>Visitar nuestro menú
                 </a>
             </div>
@@ -61,41 +61,7 @@
 
     <!-- Carousel Section -->
     <section class="carousel-section">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Nuestro Espacio</h2>
-            <div class="square-carousel">
-                <div id="coffeeCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="0" class="active"></button>
-                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="2"></button>
-                        <button type="button" data-bs-target="#coffeeCarousel" data-bs-slide-to="3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Interior de Coffee Corner">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Nuestro café especial">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Postres artesanales">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="d-block w-100 carousel-img" alt="Ambiente acogedor">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <div th:replace = "~{carrusel/fragmento :: carrusel}"></div>
     </section>
 
     <!-- Promotions Section -->
@@ -106,8 +72,8 @@
             <div class="row">
                 <!-- Promotion 1 -->
                 <div class="col-lg-12 mb-4">
-                    <div class="promo-card d-flex">
-                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Café del Día">
+                    <div class="promo-card d-flex align-items-center justify-content-center p-3">
+                        <img src="/img/cafe_negro.jpg" class="promo-img" alt="Café del Día">
                         <div class="promo-content flex-grow-1">
                             <h3 class="promo-title">Café del Día + Pastel</h3>
                             <p class="promo-desc">Disfruta de nuestro café especial del día acompañado de una rebanada de pastel casero. Perfecto para empezar la mañana con energía.</p>
@@ -123,11 +89,11 @@
                 
                 <!-- Promotion 2 -->
                 <div class="col-lg-12 mb-4">
-                    <div class="promo-card d-flex">
-                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Combo Merienda">
+                    <div class="promo-card d-flex align-items-center justify-content-center p-3">
+                        <img src="/img/emparedado_jamon_ensalada.jpg" class="promo-img" alt="Combo Merienda">
                         <div class="promo-content flex-grow-1">
                             <h3 class="promo-title">Combo Merienda</h3>
-                            <p class="promo-desc">Dos cafés latte medianos y dos croissants de almendra. Ideal para compartir una tarde de conversación y buen café.</p>
+                            <p class="promo-desc">Un emparedado de jamón acompañado de una exquisita ensalada y una limonada fresca. Ideal para empezar la mañana.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold text-coffee">$12.99</span>
                                 <button class="btn btn-add-cart">
@@ -139,12 +105,12 @@
                 </div>
                 
                 <!-- Promotion 3 -->
-                <div class="col-lg-12 mb-4">
-                    <div class="promo-card d-flex">
-                        <img src="https://static.vecteezy.com/system/resources/previews/016/180/019/non_2x/coffee-doodle-background-is-appropriate-for-your-coffee-shop-wall-decor-free-vector.jpg" class="promo-img" alt="Tarde de Té">
+                <div class="col-lg-12 mb-4" >
+                    <div class="promo-card d-flex align-items-center justify-content-center p-3">
+                        <img src="/img/cafes_frios.jpg" class="promo-img" alt="Tarde de Té">
                         <div class="promo-content flex-grow-1">
-                            <h3 class="promo-title">Tarde de Té Especial</h3>
-                            <p class="promo-desc">Selección de tés premium acompañados de mini sándwiches y pastelitos. Una experiencia británica en Coffee Corner.</p>
+                            <h3 class="promo-title">Tarde de Cafes Frios</h3>
+                            <p class="promo-desc">Selección de cafes frios premium con un acompañamiento. Una experiencia británica en Coffee Corner.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="fw-bold text-coffee">$15.99</span>
                                 <button class="btn btn-add-cart">
@@ -159,36 +125,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5><i class="fas fa-coffee me-2"></i>Coffee Corner</h5>
-                    <p>Tu rincón favorito para disfrutar del mejor café en un ambiente acogedor y relajante.</p>
-                    <div class="social-links">
-                        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5>Horario</h5>
-                    <p>Lunes a Viernes: 7:00 - 21:00</p>
-                    <p>Sábados: 8:00 - 22:00</p>
-                    <p>Domingos: 8:00 - 20:00</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5>Contacto</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Coffee Street, Ciudad</p>
-                    <p><i class="fas fa-phone me-2"></i>(123) 456-7890</p>
-                    <p><i class="fas fa-envelope me-2"></i>info@coffeecorner.com</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 Coffee Corner. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <footer th:replace = "~{general/fragmento :: footer}"></footer>
 
     <!-- Scripts -->
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>

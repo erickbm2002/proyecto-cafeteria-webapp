@@ -87,7 +87,8 @@ body {
     border-radius: 25px;
     font-weight: 500;
     transition: all 0.3s;
-    width: 100%;
+    width: 40%;
+    
 }
 
 .btn-add-cart:hover {
@@ -119,7 +120,7 @@ body {
 /* Banner Section */
 .banner-section {
     height: 90vh;
-    background-image: url('/img/cafeteria1.jpg');
+    background-image: url('/img/carrusel/cafeteria1.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -197,6 +198,7 @@ body {
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
+    background-color: var(--dark-gray);
 }
 
 /* Promotions Section */
@@ -219,8 +221,10 @@ body {
 
 .promo-img {
     width: 150px;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
+    border-radius: 5px;
+
 }
 
 .promo-content {

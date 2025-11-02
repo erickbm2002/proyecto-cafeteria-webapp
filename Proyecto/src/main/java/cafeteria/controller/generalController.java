@@ -1,5 +1,4 @@
 package cafeteria.controller;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,12 @@ public class generalController {
     public String contacto(Model model) {
         model.addAttribute("titulo_pagina", "Contacto | Coffee Corner");
         return "contacto";
+    }
+
+    @GetMapping("/menu")
+    public String menu(Model model) {
+        model.addAttribute("titulo_pagina", "Menu | Coffee Corner");
+        return "menu";
     }
 
 }
