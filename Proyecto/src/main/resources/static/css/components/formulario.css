@@ -1,4 +1,6 @@
-.form {
-    background:red;
-    
+
+form div {
+    width: 80%;
+    padding: 10px;;
 }
+
