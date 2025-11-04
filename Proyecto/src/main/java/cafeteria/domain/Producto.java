@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -29,6 +30,10 @@ public class Producto implements Serializable{
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
+
+    @Column(precision = 10, scale = 2)
+    @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
+    private Double precio;
 
     @Column(name = "iamgen_url")
     private String nombreImagen;

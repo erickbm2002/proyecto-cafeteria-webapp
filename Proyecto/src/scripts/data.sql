@@ -1,129 +1,71 @@
--- Creación del esquema
-CREATE DATABASE cafeteria
-  DEFAULT CHARACTER SET utf8mb4
-  DEFAULT COLLATE utf8mb4_unicode_ci;
-  
-  -- Creación de usuarios con contraseñas seguras
-CREATE USER 'cafeteria_admin'@'%' IDENTIFIED BY 'AdminCaf3.';
-CREATE USER 'cafeteria_reportes'@'%' IDENTIFIED BY 'ReportCaf3.';
 
--- Asignación de permisos
--- Se otorgan permisos específicos en lugar de todos los permisos a todas las tablas futuras
-GRANT SELECT, INSERT, UPDATE, DELETE ON cafeteria.* TO 'cafeteria_admin'@'%';
-GRANT SELECT ON cafeteria.* TO 'cafeteria_reportes'@'%';
-FLUSH PRIVILEGES;
+-- --- Sección de Inserción de Datos ---
+-- Inserción de Categoría
+INSERT INTO categoria (nombre) VALUES
+(1,'Bebidas'),
+(2,'Comidas'),
+(3,'Postres');
 
-USE cafeteria;
+-- Inserción de Producto
+INSERT INTO producto (id_producto, nombre, id_Categoria, descripcion, precio) VALUES
+(1,2,'Burrito de Pollo', ' Descubre nuestro burrito estrella. Pollo tierno y lleno de sabor, envuelto en una suave tortilla de harina con cremosos frijoles, arroz esponjoso, queso fundido y salsa casera.', 5),
+(2,1,'Café Frío', 'café de origen premium infusionado en frío durante horas para una suavidad inigualable. Servido sobre hielo picado con un toque de leche cremosa y un jarabe de vainilla casero.', 3);
+-- Inserción de Usuario
+INSERT INTO usuario (nombre, correo, telefono, direccion, rol) VALUES
 
--- Tabla de categorías
-CREATE TABLE categoria (
-  id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL UNIQUE,
-  activo BOOLEAN DEFAULT TRUE,
-  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE = InnoDB;
+-- Inserción de Orden
+INSERT INTO orden (id_usuario, fecha_orden, estado, total) VALUES
 
--- Tabla de productos
-CREATE TABLE producto (
-  id_producto INT AUTO_INCREMENT PRIMARY KEY,
-  id_categoria INT NOT NULL,
-  nombre VARCHAR(50) NOT NULL UNIQUE,
-  descripcion TEXT,
-  precio DECIMAL(10,2) CHECK (precio >= 0),
-  imagen_url VARCHAR(1024),
-  activo BOOLEAN DEFAULT TRUE,
-  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
-) ENGINE = InnoDB;
 
--- Tabla de usuarios
-CREATE TABLE usuario (
-  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  correo VARCHAR(100) UNIQUE,
-  telefono VARCHAR(25),
-  direccion TEXT,
-  rol ENUM('Cliente', 'Administrador') DEFAULT 'Cliente',
-  activo BOOLEAN DEFAULT TRUE,
-  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE = InnoDB;
+-- Inserción de Detalle de orden
+INSERT INTO detalle_orden (id_orden, id_producto, cantidad, precio_unitario) VALUES
 
--- Tabla de órdenes
-CREATE TABLE orden (
-  id_orden INT AUTO_INCREMENT PRIMARY KEY,
-  id_usuario INT NOT NULL,
-  fecha_orden DATE NOT NULL,
-  estado ENUM('Pendiente', 'Preparando', 'Entregada', 'Cancelada') DEFAULT 'Pendiente',
-  total DECIMAL(10,2) CHECK (total >= 0),
-  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
-) ENGINE = InnoDB;
 
--- Tabla detalle de orden (relación orden-producto)
-CREATE TABLE detalle_orden (
-  id_detalle INT AUTO_INCREMENT PRIMARY KEY,
-  id_orden INT NOT NULL,
-  id_producto INT NOT NULL,
-  cantidad INT UNSIGNED CHECK (cantidad > 0),
-  precio_unitario DECIMAL(10,2) CHECK (precio_unitario >= 0),
-  FOREIGN KEY (id_orden) REFERENCES orden(id_orden),
-  FOREIGN KEY (id_producto) REFERENCES producto(id_producto),
-  UNIQUE (id_orden, id_producto)
-) ENGINE = InnoDB;
+-- Inserción de Promoción
+INSERT INTO promocion (titulo, descripcion, fecha_inicio, fecha_fin) VALUES
 
--- Tabla de promociones
-CREATE TABLE promocion (
-  id_promocion INT AUTO_INCREMENT PRIMARY KEY,
-  titulo VARCHAR(100) NOT NULL,
-  descripcion TEXT,
-  fecha_inicio DATE,
-  fecha_fin DATE,
-  activo BOOLEAN DEFAULT TRUE,
-  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE = InnoDB;
 
--- Tabla de descuentos por producto
-CREATE TABLE descuento (
-  id_descuento INT AUTO_INCREMENT PRIMARY KEY,
-  id_producto INT NOT NULL,
-  porcentaje DECIMAL(5,2) CHECK (porcentaje >= 0 AND porcentaje <= 100),
-  fecha_inicio DATE,
-  fecha_fin DATE,
-  activo BOOLEAN DEFAULT TRUE,
-  FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
-) ENGINE = InnoDB;
+-- Inserción de Descuento
+INSERT INTO descuento (id_producto, porcentaje, fecha_inicio, fecha_fin) VALUES
 
--- Tabla de inventario
-CREATE TABLE inventario (
-  id_inventario INT AUTO_INCREMENT PRIMARY KEY,
-  id_producto INT NOT NULL,
-  cantidad_actual INT UNSIGNED DEFAULT 0,
-  fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
-) ENGINE = InnoDB;
 
--- Tabla de facturas
-CREATE TABLE factura (
-  id_factura INT AUTO_INCREMENT PRIMARY KEY,
-  id_orden INT NOT NULL,
-  fecha_emision DATE NOT NULL,
-  monto_total DECIMAL(10,2) CHECK (monto_total > 0),
-  estado ENUM('Pagada', 'Pendiente', 'Anulada') DEFAULT 'Pendiente',
-  FOREIGN KEY (id_orden) REFERENCES orden(id_orden)
-) ENGINE = InnoDB;
+-- Inserción de Inventario
+INSERT INTO inventario (id_producto, cantidad_actual) VALUES
 
--- Tabla de transacciones
-CREATE TABLE transaccion (
-  id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
-  id_factura INT NOT NULL,
-  monto DECIMAL(10,2) CHECK (monto > 0),
-  fecha_transaccion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  metodo_pago ENUM('Tarjeta', 'Efectivo', 'PayPal') NOT NULL,
-  estado ENUM('Exitosa', 'Fallida', 'Pendiente') DEFAULT 'Pendiente',
-  FOREIGN KEY (id_factura) REFERENCES factura(id_factura)
-) ENGINE = InnoDB;
+
+-- Inserción de Factura
+INSERT INTO factura (id_orden, fecha_emision, monto_total, estado) VALUES
+
+
+-- Inserción de Transacción
+INSERT INTO transaccion (id_factura, monto, metodo_pago, estado) VALUES
+
+
+
+-- Creación de vista para consultar el historial completo de órdenes con sus facturas y transacciones
+CREATE VIEW vista_flujo_orden_completo AS
+SELECT
+  o.id_orden,
+  u.nombre AS cliente,
+  o.fecha_orden,
+  o.estado AS estado_orden,
+  p.nombre AS producto,
+  do.cantidad,
+  do.precio_unitario,
+  f.id_factura,
+  f.fecha_emision,
+  f.monto_total,
+  f.estado AS estado_factura,
+  t.id_transaccion,
+  t.metodo_pago,
+  t.estado AS estado_transaccion
+FROM orden o
+JOIN usuario u ON o.id_usuario = u.id_usuario
+JOIN detalle_orden do ON o.id_orden = do.id_orden
+JOIN producto p ON do.id_producto = p.id_producto
+LEFT JOIN factura f ON o.id_orden = f.id_orden
+LEFT JOIN transaccion t ON f.id_factura = t.id_factura
+ORDER BY o.id_orden, f.id_factura, t.id_transaccion;
+
+-- Consulta de Prueba
+SELECT * FROM vista_flujo_orden_completo WHERE id_orden = 1;
