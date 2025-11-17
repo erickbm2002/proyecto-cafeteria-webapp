@@ -1,6 +1,50 @@
+@import url("../styles.css");
+
+form {
+    border: 1px solid var(--coffee-brown);
+    border-radius:35px;
+    box-shadow: 3px 3px rgb(0,0,0,0.2)
+}
 
 form div {
     width: 80%;
     padding: 10px;;
 }
+
+form button {
+    width:30%;
+    height:45px;
+    border-radius:30px;
+    background: var(--coffee-brown);
+    color:var(--white);
+    font-weight: bold;
+    font-size:20px;
+    margin-left:20px;
+    border:none;
+}
+
+form button:hover {
+    cursor:pointer;
+    background:var(--light-coffee);
+}
+
+form i {
+    font-size:20px;
+    margin-right:20px;
+    
+}
+
+.form-control {
+    border-color:var(--light-coffee);
+}
+
+.form-control:focus {
+    background-color:var(--pale-pink);
+    outline:3px solid var(--light-coffee);
+    outline-offset:3px;
+    box-shadow:none;
+}  
+
+
+
 

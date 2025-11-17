@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Menu', ${archivos_css})}"
+>
+  <body>
+    <article>
+      <section class="container flex-grow-1">
+        <div class="row">
+          <aside
+            th:replace="~{fragments/components/ubicacion :: ubicacion}"
+          ></aside>
+          <form
+            action=""
+            class="col-lg-6 d-flex flex-column align-items-center justify-content-center align-content-center"
+          >
+            <h3 class="section-title">¡Dejanos saber tu comentario!</h3>
+            <div class="form mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Nombre</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Escribe tu nombre aquí"
+              />
+            </div>
+            <div class="form mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Correo Electronico</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Escribe tu nombre aquí"
+              />
+            </div>
+            <div class="form mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Comentario</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                placeholder="Escribe tu comentario aquí"
+              ></textarea>
+            </div>
+            <button type="submit" class="form-button">
+              <i class="bi bi-envelope-arrow-up"></i>Enviar
+            </button>
+          </form>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>

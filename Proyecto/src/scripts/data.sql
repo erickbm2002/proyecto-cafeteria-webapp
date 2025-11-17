@@ -7,9 +7,10 @@ INSERT INTO categoria (nombre) VALUES
 (3,'Postres');
 
 -- Inserción de Producto
-INSERT INTO producto (id_producto, nombre, id_Categoria, descripcion, precio) VALUES
-(1,2,'Burrito de Pollo', ' Descubre nuestro burrito estrella. Pollo tierno y lleno de sabor, envuelto en una suave tortilla de harina con cremosos frijoles, arroz esponjoso, queso fundido y salsa casera.', 5),
-(2,1,'Café Frío', 'café de origen premium infusionado en frío durante horas para una suavidad inigualable. Servido sobre hielo picado con un toque de leche cremosa y un jarabe de vainilla casero.', 3);
+INSERT INTO producto (id_producto,id_categoria, nombre, descripcion, precio, imagen_url) VALUES
+(1,2,'Burrito de Pollo', ' Descubre nuestro burrito estrella. Pollo tierno y lleno de sabor, envuelto en una suave tortilla de harina con cremosos frijoles, arroz esponjoso, queso fundido y salsa casera.', 5, 'burrito_pollo.jpg'),
+(2,1,'Café Frío', 'café de origen premium infusionado en frío durante horas para una suavidad inigualable. Servido sobre hielo picado con un toque de leche cremosa y un jarabe de vainilla casero.', 3, 'cafe_frio.jpg');
+
 -- Inserción de Usuario
 INSERT INTO usuario (nombre, correo, telefono, direccion, rol) VALUES
 

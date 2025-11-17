@@ -5,19 +5,17 @@ CREATE DATABASE cafeteria
   
   -- Creación de usuarios con contraseñas seguras
 CREATE USER 'cafeteria_admin'@'%' IDENTIFIED BY 'AdminCaf3.';
-CREATE USER 'cafeteria_reportes'@'%' IDENTIFIED BY 'ReportCaf3.';
 
--- Asignación de permisos
--- Se otorgan permisos específicos en lugar de todos los permisos a todas las tablas futuras
+-- Asignación de permisos al usuario administrador en la BD 'cafeteria'
 GRANT SELECT, INSERT, UPDATE, DELETE ON cafeteria.* TO 'cafeteria_admin'@'%';
-GRANT SELECT ON cafeteria.* TO 'cafeteria_reportes'@'%';
+
 FLUSH PRIVILEGES;
 
 USE cafeteria;
 
 -- Tabla de categorías
---Relacion uno a muchos
---Cada categoría puede tener muchos productos, pero cada producto pertenece a una sola categoría.
+-- Relacion uno a muchos
+-- Cada categoría puede tener muchos productos, pero cada producto pertenece a una sola categoría.
 CREATE TABLE categoria (
   id_categoria INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL UNIQUE,
@@ -27,8 +25,8 @@ CREATE TABLE categoria (
 ) ENGINE = InnoDB;
 
 -- Tabla de productos
---Relacion uno a muchos
---Cada categoría puede tener muchos productos, pero cada producto pertenece a una sola categoría.
+-- Relacion uno a muchos
+-- Cada categoría puede tener muchos productos, pero cada producto pertenece a una sola categoría.
 CREATE TABLE producto (
   id_producto INT AUTO_INCREMENT PRIMARY KEY,
   id_categoria INT NOT NULL,
@@ -56,8 +54,8 @@ CREATE TABLE usuario (
 ) ENGINE = InnoDB;
 
 -- Tabla de órdenes
---Relacion uno a muchos
---Cada usuario puede realizar múltiples órdenes, pero cada orden pertenece a un solo usuario.
+-- Relacion uno a muchos
+-- Cada usuario puede realizar múltiples órdenes, pero cada orden pertenece a un solo usuario.
 CREATE TABLE orden (
   id_orden INT AUTO_INCREMENT PRIMARY KEY,
   id_usuario INT NOT NULL,
@@ -70,9 +68,9 @@ CREATE TABLE orden (
 ) ENGINE = InnoDB;
 
 -- Tabla detalle de orden (relación orden-producto)
---Relacion uno a muchos para ambos casos
---Cada orden puede contener múltiples productos, registrados en la tabla detalle_orden.
---Cada producto puede aparecer en múltiples detalles de orden (en distintas órdenes), pero cada detalle se refiere a un solo producto.
+-- Relacion uno a muchos para ambos casos
+-- Cada orden puede contener múltiples productos, registrados en la tabla detalle_orden.
+-- Cada producto puede aparecer en múltiples detalles de orden (en distintas órdenes), pero cada detalle se refiere a un solo producto.
 CREATE TABLE detalle_orden (
   id_detalle INT AUTO_INCREMENT PRIMARY KEY,
   id_orden INT NOT NULL,
@@ -97,8 +95,8 @@ CREATE TABLE promocion (
 ) ENGINE = InnoDB;
 
 -- Tabla de descuentos por producto
---Relacion uno a muchos
---Cada producto puede tener múltiples descuentos en distintos periodos, pero cada descuento está vinculado a un solo producto.
+-- Relacion uno a muchos
+-- Cada producto puede tener múltiples descuentos en distintos periodos, pero cada descuento está vinculado a un solo producto.
 CREATE TABLE descuento (
   id_descuento INT AUTO_INCREMENT PRIMARY KEY,
   id_producto INT NOT NULL,
@@ -110,8 +108,8 @@ CREATE TABLE descuento (
 ) ENGINE = InnoDB;
 
 -- Tabla de inventario
---Relacion uno a uno
---Cada producto tiene un único registro de inventario que indica su cantidad actual. La relación es directa y exclusiva.
+-- Relacion uno a uno
+-- Cada producto tiene un único registro de inventario que indica su cantidad actual. La relación es directa y exclusiva.
 CREATE TABLE inventario (
   id_inventario INT AUTO_INCREMENT PRIMARY KEY,
   id_producto INT NOT NULL,
@@ -121,8 +119,8 @@ CREATE TABLE inventario (
 ) ENGINE = InnoDB;
 
 -- Tabla de facturas
---Relacion uno a uno
---Cada orden genera una única factura, y cada factura está asociada a una sola orden.
+-- Relacion uno a uno
+-- Cada orden genera una única factura, y cada factura está asociada a una sola orden.
 CREATE TABLE factura (
   id_factura INT AUTO_INCREMENT PRIMARY KEY,
   id_orden INT NOT NULL,
@@ -133,8 +131,8 @@ CREATE TABLE factura (
 ) ENGINE = InnoDB;
 
 -- Tabla de transacciones
---Relacion uno a muchos
---Una factura puede tener múltiples transacciones (por ejemplo, intentos de pago fallidos, pagos parciales, etc.), pero cada transacción pertenece a una sola factura.
+-- Relacion uno a muchos
+-- Una factura puede tener múltiples transacciones (por ejemplo, intentos de pago fallidos, pagos parciales, etc.), pero cada transacción pertenece a una sola factura.
 CREATE TABLE transaccion (
   id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
   id_factura INT NOT NULL,
@@ -150,5 +148,5 @@ CREATE TABLE comentario (
   nombre VARCHAR(50) NOT NULL,
   correo VARCHAR(100) NOT NULL,
   comentario TEXT NOT NULL,
-  fecha_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  fecha_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB;

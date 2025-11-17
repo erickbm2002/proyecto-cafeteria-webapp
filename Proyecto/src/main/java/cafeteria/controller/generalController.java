@@ -1,4 +1,7 @@
 package cafeteria.controller;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,16 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GeneralController {
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("titulo_pagina", "Inicio | Coffee Corner");
-        return "index";
+    @GetMapping("/inicio")
+    public String index() {
+        return "/pages/index";
     }
 
     @GetMapping("/contacto")
     public String contacto(Model model) {
-        model.addAttribute("titulo_pagina", "Contacto | Coffee Corner");
-        return "contacto";
+        List<String> archivosCss = Arrays.asList("formulario.css");
+        model.addAttribute("archivos_css", archivosCss);
+        return "/pages/contacto";
+
     }
 
 }

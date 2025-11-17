@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article},'Inicio',null)}"
+>
+  <body>
+    <article>
+      <!-- Banner Section -->
+      <section class="banner-section">
+        <div class="container">
+          <div class="banner-content">
+            <h1 class="banner-title">Bienvenido a Coffee Corner</h1>
+            <p class="banner-subtitle">¿Deseas un café?</p>
+            <a th:href="@{/menu}" class="btn btn-menu">
+              <i class="fas fa-utensils me-2"></i>Visitar nuestro menú
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="info-section">
+        <div class="container">
+          <div class="row d-flex">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <h2 class="section-title">Nuestra Historia</h2>
+              <p class="history-text">
+                Coffee Corner nació en 2010 con la visión de crear un espacio
+                acogedor donde la comunidad pudiera reunirse, disfrutar de café
+                de calidad y compartir momentos especiales. Nuestros fundadores,
+                apasionados por el café de especialidad, viajaron por diferentes
+                regiones cafetaleras para seleccionar los mejores granos.
+              </p>
+              <p class="history-text">
+                Hoy, después de más de una década, mantenemos nuestro compromiso
+                con la calidad y el servicio excepcional. Cada taza de café que
+                servimos cuenta una historia de dedicación, desde el cultivo
+                sostenible hasta el tostado artesanal.
+              </p>
+              <p class="history-text">
+                En Coffee Corner no solo servimos café, creamos experiencias.
+                Nuestro espacio está diseñado para que te sientas como en casa,
+                ya sea que vengas a trabajar, a reunirte con amigos o
+                simplemente a disfrutar de un momento de tranquilidad.
+              </p>
+            </div>
+            <aside th:replace="~{fragments/components/ubicacion :: ubicacion}"></aside>
+          </div>
+        </div>
+      </section>
+      <!-- Carousel Section -->
+      <aside class="carousel-section">
+        <div th:replace="~{fragments/components/carrusel:: carrusel}"></div>
+      </aside>
+
+      <!-- Promotions Section -->
+      <section class="promotions-section">
+        <div class="container">
+          <h2 class="section-title text-center mb-5">Promociones Especiales</h2>
+
+          <div class="row">
+            <!-- Promotion 1 -->
+            <div class="col-lg-12 mb-4">
+              <div
+                class="promo-card d-flex align-items-center justify-content-center p-3"
+              >
+                <img
+                  src="/img/cafe_negro.jpg"
+                  class="promo-img"
+                  alt="Café del Día"
+                />
+                <div class="promo-content flex-grow-1">
+                  <h3 class="promo-title">Café del Día + Pastel</h3>
+                  <p class="promo-desc">
+                    Disfruta de nuestro café especial del día acompañado de una
+                    rebanada de pastel casero. Perfecto para empezar la mañana
+                    con energía.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="fw-bold text-coffee">$8.99</span>
+                    <button class="btn btn-add-cart">
+                      <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Promotion 2 -->
+            <div class="col-lg-12 mb-4">
+              <div
+                class="promo-card d-flex align-items-center justify-content-center p-3"
+              >
+                <img
+                  src="/img/emparedado_jamon_ensalada.jpg"
+                  class="promo-img"
+                  alt="Combo Merienda"
+                />
+                <div class="promo-content flex-grow-1">
+                  <h3 class="promo-title">Combo Merienda</h3>
+                  <p class="promo-desc">
+                    Un emparedado de jamón acompañado de una exquisita ensalada
+                    y una limonada fresca. Ideal para empezar la mañana.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="fw-bold text-coffee">$12.99</span>
+                    <button class="btn btn-add-cart">
+                      <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Promotion 3 -->
+            <div class="col-lg-12 mb-4">
+              <div
+                class="promo-card d-flex align-items-center justify-content-center p-3"
+              >
+                <img
+                  src="/img/cafes_frios.jpg"
+                  class="promo-img"
+                  alt="Tarde de Té"
+                />
+                <div class="promo-content flex-grow-1">
+                  <h3 class="promo-title">Tarde de Cafes Frios</h3>
+                  <p class="promo-desc">
+                    Selección de cafes frios premium con un acompañamiento. Una
+                    experiencia británica en Coffee Corner.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="fw-bold text-coffee">$15.99</span>
+                    <button class="btn btn-add-cart">
+                      <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>

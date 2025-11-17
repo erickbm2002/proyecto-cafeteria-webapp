@@ -96,6 +96,18 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.52</version>
         </dependency>
+
+        <!-- dependencias para acceso y seguridad -->
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+         dependencias para thymeleaf
+        <dependency> // editar despues
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency> -->
     </dependencies>
 
 	<build>

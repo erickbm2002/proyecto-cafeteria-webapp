@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article},'Menu',null)}"
+  >
+  <body>
+    <article>
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1 class="page-title">Nuestro Menú</h1>
+          <p class="page-subtitle">
+            Descubre nuestra selección de cafés especiales, deliciosos postres y
+            mucho más
+          </p>
+        </div>
+      </section>
+
+      <!-- Menu Section -->
+      <section class="menu-section">
+        <div class="container">
+          <!-- Category Filter -->
+          <div class="category-filter text-center">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="coffee">Cafés</button>
+            <button class="filter-btn" data-filter="tea">Tés</button>
+            <button class="filter-btn" data-filter="pastry">Pastelería</button>
+            <button class="filter-btn" data-filter="sandwich">
+              Sándwiches
+            </button>
+            <button class="filter-btn" data-filter="special">Especiales</button>
+          </div>
+
+          <!-- Coffee Category -->
+          <h2 class="section-title">Cafés Especiales</h2>
+          <div class="row" th:replace="~{fragments/components/card-producto :: card_producto(${productos})}">
+          </div>
+
+          <!-- Pastry Category -->
+          <h2 class="section-title mt-5">Pastelería Artesanal</h2>
+        </div>
+      </section>
+    </article>
+
+   <!--  Scripts -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script
+      th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        console.log("Menú de Coffee Corner cargado correctamente");
+
+        // Quantity controls
+        $(".plus-btn").click(function () {
+          const display = $(this).siblings(".quantity-display");
+          let quantity = parseInt(display.text());
+          display.text(quantity + 1);
+        });
+
+        $(".minus-btn").click(function () {
+          const display = $(this).siblings(".quantity-display");
+          let quantity = parseInt(display.text());
+          if (quantity > 1) {
+            display.text(quantity - 1);
+          }
+        });
+
+        // Category filter
+        $(".filter-btn").click(function () {
+          $(".filter-btn").removeClass("active");
+          $(this).addClass("active");
+
+          const filter = $(this).data("filter");
+
+          if (filter === "all") {
+            $("[data-category]").show();
+          } else {
+            $("[data-category]").hide();
+            $(`[data-category="${filter}"]`).show();
+          }
+        });
+
+        // Add to cart functionality
+        $(".btn-add-cart").click(function () {
+          const card = $(this).closest(".menu-card");
+          const productName = card.find(".menu-title").text();
+          const quantity = card.find(".quantity-display").text();
+          const price = card.find(".menu-price").text();
+
+          // Reset quantity
+          card.find(".quantity-display").text("1");
+
+          // Show confirmation (you can replace this with actual cart functionality)
+          alert(
+            `¡Agregado al carrito!\n${quantity} x ${productName}\nTotal: ${price}`
+          );
+        });
+      });
+    </script> 
+  </body>
+</html>

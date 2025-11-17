@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div class="row" th:fragment="card_producto(productos)">
+      <!-- Product 1 -->
+      <div
+        th:each="prdto : ${productos}"
+        class="col-lg-4 col-md-6 mb-4"
+        data-category="coffee"
+      >
+        <div class="menu-card">
+          <div class="position-relative">
+            <img
+              th:src="@{/img/} + ${prdto.nombreImagen}"
+              class="menu-img"
+              thalt="${prdto.nombreImagen}"
+            />
+            <span class="popular-badge">Popular</span>
+          </div>
+          <div class="menu-content">
+            <h3 class="menu-title">[[${prdto.nombre}]]</h3>
+            <p class="menu-desc">[[${prdto.descripcion}]]</p>
+            <div class="menu-price">$3.50</div>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus-btn">-</button>
+              <span class="quantity-display">1</span>
+              <button class="quantity-btn plus-btn">+</button>
+            </div>
+            <button class="btn-add-cart">
+              <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

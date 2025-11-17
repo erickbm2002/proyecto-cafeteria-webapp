@@ -1,6 +1,8 @@
 package cafeteria.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "productos")
+@Table(name = "producto")
 public class Producto implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -33,9 +35,9 @@ public class Producto implements Serializable{
 
     @Column(precision = 10, scale = 2)
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
-    private Double precio;
+    private BigDecimal precio;
 
-    @Column(name = "iamgen_url")
+    @Column(name = "imagen_url")
     private String nombreImagen;
 
     private Boolean activo;

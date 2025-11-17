@@ -417,6 +417,10 @@ body {
     color: #aaa;
 }
 
+article {
+    padding:30px;
+}
+
 /* ===== UTILIDADES ===== */
 .text-coffee {
     color: var(--coffee-brown) !important;
