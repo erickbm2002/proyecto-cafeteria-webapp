@@ -25,4 +25,5 @@ public class MenuController {
         model.addAttribute("productos", productosDB);
         return "/pages/menu";
     }
+
 }
