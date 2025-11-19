@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head :: head_principal}"></head>
+<head th:replace="~{fragments/head :: head_principal(${archivos_css},'Admin')}"></head>
 <body>
+    
     <footer th:replace="~{fragments/footer ::footer}"></footer>
 </body>
 </html>

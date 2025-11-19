@@ -1,5 +1,8 @@
 package cafeteria.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,8 @@ public class DevelopentController {
 
     @GetMapping("/dev/preview-component")
     public String previewComponent(Model model) {
-        return "pages/index";
+        List<String> archivosCss = Arrays.asList("tablas.css");
+        model.addAttribute("archivos_css", archivosCss);
+        return "/layout/admin";
     }
 }
