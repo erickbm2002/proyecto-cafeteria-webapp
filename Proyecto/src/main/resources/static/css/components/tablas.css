@@ -1,9 +1,6 @@
 @import url("../styles.css");
 
 
-table button {
-  margin-right: 5px;
-}
 
 tr {
     text-align: center;
@@ -17,9 +14,13 @@ tbody tr:hover {
     background-color: #f5f5f5;
 }
 
+table {
+    font-size:10px;
+}
+
 table img {
     width: 70px;
-    height: 80px;
+    height: 45px;
     object-fit: contain;
     padding: 4px;
 }
@@ -29,11 +30,7 @@ table input {
     height: 30px;
 }
 
-.table-primary {
-    background-color: red;
-}
-
-.table-secundary {
-    background-color: blue;
+.container-btn-acciones button {
+    margin:0 5px;
 }
 
