@@ -1,11 +1,144 @@
-<html xmlns:th="http://www.thymeleaf.org" th:replace="">
-<html lang="en">
-
-<body>
-    <section>
-        <h2>Administrador de Productos</h2>
-        <br>
-    </section>
-    
-</body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/admin :: layout_admin(~{::section}, @{/css/admin_productos.css})}"
+>
+  <html lang="en">
+    <body>
+      <section>
+        <h2 class="page-title text-center">Control de Inventarios</h2>
+        <ul class="nav nav-tabs d-flex">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              >Productos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Categorias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Promociones</a>
+          </li>
+          <li class="nav-item ms-auto btn-agregar">
+            <a href="#" class="nav-link"
+              ><i class="bi bi-plus"></i>Agregar Producto</a
+            >
+          </li>
+        </ul>
+        <article>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"># Id</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Activo</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Comidas</td>
+                <td>Burrito de Pollo</td>
+                <td>
+                  KASKFAKFKASFKASKFAKSF KKASFKASK ASK FKAS FKASFKASK FASKFKSAFK
+                  AKFAKSFAK KASFKASFKAK SAKFKA FKASFKAS KFASKF ASK FKASFKAS
+                  KASFK ASKAS KASK KAS FKASFKAFKASKF ASKKAS KAS KSAK FAKS FKAS
+                  FKASK FAKS KSA KASK FASK KAS FKAKS
+                </td>
+                <td>$5</td>
+                <td>
+                  <img
+                    src="../../static/img/burrito_pollo.jpg"
+                    alt=""
+                    width="50px"
+                  />
+                </td>
+                <td>
+                  <input type="checkbox" name="isActive" id="" checked="true" />
+                </td>
+                <td>
+                  <div class="d-flex container-btn-acciones">
+                    <button class="btn btn-warning">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Comidas</td>
+                <td>Burrito de Pollo</td>
+                <td>
+                  KASKFAKFKASFKASKFAKSF KKASFKASK ASK FKAS FKASFKASK FASKFKSAFK
+                  AKFAKSFAK KASFKASFKAK SAKFKA FKASFKAS KFASKF ASK FKASFKAS
+                  KASFK ASKAS KASK KAS FKASFKAFKASKF ASKKAS KAS KSAK FAKS FKAS
+                  FKASK FAKS KSA KASK FASK KAS FKAKS
+                </td>
+                <td>$5</td>
+                <td>
+                  <img
+                    src="../../static/img/burrito_pollo.jpg"
+                    alt=""
+                    width="50px"
+                  />
+                </td>
+                <td>
+                  <input type="checkbox" name="isActive" id="" checked="true" />
+                </td>
+                <td>
+                  <div class="d-flex container-btn-acciones">
+                    <button class="btn btn-warning">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Comidas</td>
+                <td>Burrito de Pollo</td>
+                <td>
+                  KASKFAKFKASFKASKFAKSF KKASFKASK ASK FKAS FKASFKASK FASKFKSAFK
+                  AKFAKSFAK KASFKASFKAK SAKFKA FKASFKAS KFASKF ASK FKASFKAS
+                  KASFK ASKAS KASK KAS FKASFKAFKASKF ASKKAS KAS KSAK FAKS FKAS
+                  FKASK FAKS KSA KASK FASK KAS FKAKS
+                </td>
+                <td>$5</td>
+                <td>
+                  <img
+                    src="../../static/img/burrito_pollo.jpg"
+                    alt=""
+                    width="50px"
+                  />
+                </td>
+                <td>
+                  <input type="checkbox" name="isActive" id="" checked="true" />
+                </td>
+                <td>
+                  <div class="d-flex container-btn-acciones">
+                    <button class="btn btn-warning">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+    </body>
+  </html>
 </html>

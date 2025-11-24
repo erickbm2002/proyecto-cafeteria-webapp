@@ -1,4 +1,4 @@
-package cafeteria.controller;
+package cafeteria.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

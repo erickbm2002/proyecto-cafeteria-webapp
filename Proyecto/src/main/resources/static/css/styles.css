@@ -434,6 +434,15 @@ article {
     background-color: var(--coffee-brown) !important;
 }
 
+
+.btn-agregar {
+    background-color: greenyellow;
+    border-radius: 15px;
+    margin-right: 10px; }
+
+
+
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .banner-title {
