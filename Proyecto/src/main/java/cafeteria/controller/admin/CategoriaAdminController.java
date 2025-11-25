@@ -7,25 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import cafeteria.Services.CategoriaServices;
-import cafeteria.Services.ProductoServices;
+
 
 @Controller
 @RequestMapping("/admin/administrar")
-public class ProductoAdminController {
-
-    @Autowired
-    private ProductoServices productoServices;
+public class CategoriaAdminController {
 
     @Autowired
     private CategoriaServices categoriaServices;
 
-    @GetMapping("/productos")
-    public String productosAdmin(Model model) {
-        var productosBd = productoServices.getProductos(false);
-        var categoriasBd = categoriaServices.getCategorias(true);
-        model.addAttribute("productos", productosBd);
+    @GetMapping("/Categorias")
+    public String categoriasAdmin(Model model) {
+        var categoriasBd = categoriaServices.getCategorias(false);
         model.addAttribute("categorias", categoriasBd);
-        return "pages/admin/productos";
+        return "pages/admin/categorias";
     }
-
+    
 }

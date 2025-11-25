@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout_admin(contenido,archivos_css = null)">
-<head th:replace="~{fragments/head :: head_principal(${archivos_css},'Admin', ${archivos_css})}"></head>
+<head th:replace="~{fragments/head :: head_principal(${archivos_css},'Admin')}"></head>
 <body class="container-fluided d-flex vh-100">
-    <header th:replace="~{fragments/header :: header_admin}"></header>
+    <header th:replace="~{fragments/header_admin :: header_admin}"></header>
     <main>
         <th:block th:replace="${contenido}"></th:block>
     </main>
-    <footer th:replace="~{fragments/footer ::footer}"></footer>
 </body>
 </html>
