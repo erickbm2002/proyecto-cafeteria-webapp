@@ -15,11 +15,9 @@
             action=""
             class="col-lg-6 d-flex flex-column align-items-center justify-content-center align-content-center"
           >
-            <h3 class="section-title">¡Dejanos saber tu comentario!</h3>
+            <h3 class="section-title" th:text="#{contact.title}"></h3>
             <div class="form mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Nombre</label
-              >
+              <label for="exampleFormControlInput1" class="form-label" th:text="#{contact.name}"></label>
               <input
                 type="text"
                 class="form-control"

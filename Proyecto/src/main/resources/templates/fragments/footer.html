@@ -3,22 +3,19 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h5><i class="fas fa-coffee me-2"></i>Coffee Corner</h5>
-          <p>
-            Tu rincón favorito para disfrutar del mejor café en un ambiente
-            acogedor y relajante.
-          </p>
-          <div class="social-links">
-            <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-          </div>
+            <h5><i class="fas fa-coffee me-2"></i><span th:text="#{footer.brand}"></span></h5>
+            <p th:text="#{footer.description}"></p>
+            <div class="social-links">
+                <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+            </div>
         </div>
         <div class="col-md-4 mb-4">
-          <h5>Horario</h5>
-          <p>Lunes a Viernes: 7:00 - 21:00</p>
-          <p>Sábados: 8:00 - 22:00</p>
-          <p>Domingos: 8:00 - 20:00</p>
+          <h5 th:text="#{footer.schedule}"></h5>
+          <p th:text="#{footer.schedule.weekdays}"></p>
+          <p th:text="#{footer.schedule.saturday}"></p>
+          <p th:text="#{footer.schedule.sunday}"></p>
         </div>
         <div class="col-md-4 mb-4">
           <h5>Contacto</h5>

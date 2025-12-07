@@ -10,8 +10,8 @@
       <section class="banner-section">
         <div class="container">
           <div class="banner-content">
-            <h1 class="banner-title">Bienvenido a Coffee Corner</h1>
-            <p class="banner-subtitle">¿Deseas un café?</p>
+            <h1 class="banner-title" th:text="#{index.banner.title}"></h1>
+            <p class="banner-subtitle" th:text="#{index.banner.subtitle}"></p>
             <a th:href="@{/menu}" class="btn btn-menu">
               <i class="fas fa-utensils me-2"></i>Visitar nuestro menú
             </a>
@@ -29,7 +29,7 @@
                 de calidad y compartir momentos especiales. Nuestros fundadores,
                 apasionados por el café de especialidad, viajaron por diferentes
                 regiones cafetaleras para seleccionar los mejores granos.
-              </p>
+              </p> 
               <p class="history-text">
                 Hoy, después de más de una década, mantenemos nuestro compromiso
                 con la calidad y el servicio excepcional. Cada taza de café que

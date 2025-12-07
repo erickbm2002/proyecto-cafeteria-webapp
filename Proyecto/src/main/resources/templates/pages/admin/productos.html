@@ -5,7 +5,7 @@
   <html lang="en">
     <body>
       <section>
-        <h2 class="page-title text-center">Control de Inventarios</h2>
+        <h2 class="page-title text-center" th:text="#{inventory.title}"></h2>
         <ul class="nav nav-tabs d-flex">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"
@@ -28,14 +28,14 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col"># Id</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Nombre Producto</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Activo</th>
-                <th scope="col">Acciones</th>
+                  <th scope="col"># Id</th>
+                  <th scope="col" th:text="#{product.category}"></th>
+                  <th scope="col" th:text="#{product.name}"></th>
+                  <th scope="col" th:text="#{product.description}"></th>
+                  <th scope="col" th:text="#{product.price.label}"></th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col" th:text="#{product.active}"></th>
+                  <th scope="col" th:text="#{product.actions}"></th>
               </tr>
             </thead>
             <tbody>
