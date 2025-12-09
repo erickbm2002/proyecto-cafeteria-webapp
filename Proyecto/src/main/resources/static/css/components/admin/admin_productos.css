@@ -1,0 +1,232 @@
+/* ===== ESTILOS ADMIN - PRODUCTOS ===== */
+
+.page-title {
+    color: var(--coffee-brown);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* Tabs */
+.nav-tabs .nav-link {
+    color: var(--dark-gray);
+    font-weight: 500;
+    border: none;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: var(--light-coffee);
+    color: var(--coffee-brown);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--coffee-brown);
+    font-weight: bold;
+    border-color: var(--coffee-brown);
+    background-color: transparent;
+}
+
+.btn-agregar {
+    background-color: #90ee90;
+    border-radius: 15px;
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #7ed97e;
+    transform: translateY(-2px);
+}
+
+.btn-agregar .nav-link {
+    color: var(--dark-gray) !important;
+    font-weight: 600;
+}
+
+/* Tabla */
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.table {
+    margin-bottom: 0;
+    background-color: var(--white);
+}
+
+.table thead {
+    background-color: var(--dark-gray);
+    color: var(--white);
+}
+
+.table thead th {
+    border: none;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table tbody tr {
+    transition: all 0.3s;
+}
+
+.table tbody tr:hover {
+    background-color: var(--pale-pink);
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+/* Botones de acción */
+.btn-sm {
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: var(--dark-gray);
+}
+
+.btn-warning:hover {
+    background-color: #ffb300;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Switch de activo/inactivo */
+.form-check-input {
+    cursor: pointer;
+    width: 3em;
+    height: 1.5em;
+}
+
+.form-check-input:checked {
+    background-color: var(--coffee-brown);
+    border-color: var(--coffee-brown);
+}
+
+/* Modal */
+.modal-header.bg-coffee {
+    background-color: var(--coffee-brown) !important;
+}
+
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.modal-footer {
+    border-top: 2px solid var(--light-gray);
+}
+
+/* Formulario */
+.form-label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--coffee-brown);
+    box-shadow: 0 0 0 0.2rem rgba(111, 78, 55, 0.25);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+/* Preview de imagen */
+#imagePreview img {
+    border: 3px solid var(--light-coffee);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Alertas */
+.alert {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+}
+
+.alert i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Botones principales */
+.btn-coffee {
+    background-color: var(--coffee-brown);
+    border: none;
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-coffee:hover {
+    background-color: var(--light-coffee);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-agregar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+}

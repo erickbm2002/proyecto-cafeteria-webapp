@@ -1,0 +1,121 @@
+/* ===== ESTILOS ADMIN - CATEGORÍAS ===== */
+
+/* Cards de Categorías */
+.categoria-card {
+    background: var(--white);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.categoria-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.categoria-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--coffee-brown), var(--light-coffee));
+}
+
+.categoria-nombre {
+    color: var(--coffee-brown);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.categoria-info {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.categoria-info i {
+    font-size: 1rem;
+}
+
+.categoria-actions {
+    border-top: 2px solid var(--pale-pink);
+    padding-top: 15px;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+/* Botones en cards */
+.categoria-card .btn-sm {
+    font-size: 0.875rem;
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+/* Switch en cards */
+.categoria-card .form-check {
+    background-color: var(--pale-pink);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.categoria-card .form-check-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+}
+
+/* Modal específico para categorías */
+.modal-body .alert-info {
+    background-color: #d1ecf1;
+    border: none;
+    border-left: 4px solid #0c5460;
+}
+
+/* Animación para las cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.categoria-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .categoria-card {
+        margin-bottom: 15px;
+    }
+    
+    .categoria-actions {
+        flex-direction: column;
+    }
+    
+    .categoria-actions .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}

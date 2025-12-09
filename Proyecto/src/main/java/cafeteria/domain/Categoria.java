@@ -1,10 +1,16 @@
 package cafeteria.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +19,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @Entity
 @Table(name = "categoria")
@@ -28,8 +35,28 @@ public class Categoria implements Serializable {
     @Size(min = 1, max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
     private String nombre;
 
-    private Boolean activo;
+    private Boolean activo = true;
+
+  @Column(name = "fecha_creacion", updatable = false)
+    @CreatedDate
+    private LocalDateTime fechaCreacion;
+
+    @Column(name = "fecha_modificacion")
+    @LastModifiedDate
+    private LocalDateTime fechaModificacion;
 
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productos;
+
+    
+
+    // Método auxiliar para contar productos activos
+    public long getProductosActivosCount() {
+        if (productos == null) {
+            return 0;
+        }
+        return productos.stream()
+            .filter(p -> p.getActivo() != null && p.getActivo())
+            .count();
+    }
 }

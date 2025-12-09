@@ -2,11 +2,25 @@
 <html
   lang="es"
   xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{layout/public :: layout_public(~{::article}, 'Menu', ${archivos_css})}"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Contacto', ${archivos_css})}"
 >
   <body>
     <article>
-      <section class="container flex-grow-1">
+      <section class="container flex-grow-1 py-5">
+        <!-- Alertas de mensajes -->
+        <div th:if="${mensaje}" class="alert alert-dismissible fade show mb-4" 
+             th:classappend="${'alert-' + tipo}" role="alert">
+          <i class="bi" th:classappend="${tipo == 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'}"></i>
+          <span th:text="${mensaje}"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span th:text="${error}"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
         <div class="row">
           <aside
             th:replace="~{fragments/components/ubicacion :: ubicacion}"
@@ -15,9 +29,11 @@
             action=""
             class="col-lg-6 d-flex flex-column align-items-center justify-content-center align-content-center"
           >
-            <h3 class="section-title" th:text="#{contact.title}"></h3>
+            <h3 class="section-title">¡Dejanos saber tu comentario!</h3>
             <div class="form mb-3">
-              <label for="exampleFormControlInput1" class="form-label" th:text="#{contact.name}"></label>
+              <label for="exampleFormControlInput1" class="form-label"
+                >Nombre</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -54,5 +70,25 @@
         </div>
       </section>
     </article>
+
+    <!-- Scripts -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
+    
+    <script>
+      $(document).ready(function() {
+        // Auto-cerrar alertas después de 5 segundos
+        setTimeout(function() {
+          $('.alert').fadeOut('slow');
+        }, 5000);
+
+        // Limpiar formulario después de envío exitoso
+        if ($('.alert-success').length > 0) {
+          $('#nombre').val('');
+          $('#correo').val('');
+          $('#comentario').val('');
+        }
+      });
+    </script>
   </body>
 </html>
