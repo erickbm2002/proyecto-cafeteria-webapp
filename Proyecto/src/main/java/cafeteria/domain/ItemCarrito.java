@@ -1,4 +1,3 @@
-// 📁 UBICACIÓN: src/main/java/cafeteria/domain/ItemCarrito.java
 
 package cafeteria.domain;
 
@@ -24,20 +23,23 @@ public class ItemCarrito implements Serializable {
     private String nombreCategoria;
     private boolean tieneDescuento;
 
+    // Referencia al producto completo (necesaria para crear DetalleOrden)
+    private Producto producto;
+
     // Constructor vacío
     public ItemCarrito() {
     }
 
     // Constructor con producto
     public ItemCarrito(Producto producto, Integer cantidad) {
+        this.producto = producto; // IMPORTANTE: Guardar referencia al producto completo
         this.idProducto = producto.getIdProducto();
         this.nombre = producto.getNombre();
         this.precio = producto.getPrecio();
         this.cantidad = cantidad;
         this.nombreImagen = producto.getNombreImagen();
-        this.nombreCategoria = producto.getCategoria() != null ? 
-                                producto.getCategoria().getNombre() : "";
-        
+        this.nombreCategoria = producto.getCategoria() != null ? producto.getCategoria().getNombre() : "";
+
         // Verificar si tiene descuento
         BigDecimal precioConDesc = producto.getPrecioConDescuento();
         if (precioConDesc != null && precioConDesc.compareTo(producto.getPrecio()) < 0) {
@@ -71,7 +73,7 @@ public class ItemCarrito implements Serializable {
         }
         BigDecimal diferencia = precio.subtract(precioConDescuento);
         BigDecimal porcentaje = diferencia.divide(precio, 2, BigDecimal.ROUND_HALF_UP)
-                                         .multiply(new BigDecimal(100));
+                .multiply(new BigDecimal(100));
         return porcentaje.intValue();
     }
 }

@@ -13,11 +13,10 @@
       <th:block th:replace="${contenido}"></th:block>
     </main>
     <footer th:replace="~{fragments/footer :: footer}"></footer>
-    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
-    <script
-      th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"
-    ></script>
-
+     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/checkout.js}"></script>
+    <script> th:src="@{/js/misPedidos.js}"</script>
     <script>
       $(document).ready(function () {
         console.log("Coffee Corner cargado correctamente");

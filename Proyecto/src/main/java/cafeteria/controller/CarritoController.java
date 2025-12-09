@@ -32,7 +32,7 @@ public class CarritoController {
         model.addAttribute("totalConDescuentos", carritoService.getTotalConDescuentos());
         model.addAttribute("ahorroTotal", carritoService.getAhorroTotal());
         model.addAttribute("estaVacio", carritoService.estaVacio());
-        
+
         return "pages/carrito";
     }
 
@@ -41,9 +41,9 @@ public class CarritoController {
      */
     @PostMapping("/agregar")
     public String agregarProducto(@RequestParam Integer idProducto,
-                                   @RequestParam(defaultValue = "1") Integer cantidad,
-                                   @RequestParam(required = false) String origen,
-                                   RedirectAttributes redirectAttributes) {
+            @RequestParam(defaultValue = "1") Integer cantidad,
+            @RequestParam(required = false) String origen,
+            RedirectAttributes redirectAttributes) {
         try {
             carritoService.agregarProducto(idProducto, cantidad);
             redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito");
@@ -65,8 +65,8 @@ public class CarritoController {
      */
     @PostMapping("/actualizar/{idProducto}")
     public String actualizarCantidad(@PathVariable Integer idProducto,
-                                      @RequestParam Integer cantidad,
-                                      RedirectAttributes redirectAttributes) {
+            @RequestParam Integer cantidad,
+            RedirectAttributes redirectAttributes) {
         try {
             carritoService.actualizarCantidad(idProducto, cantidad);
             redirectAttributes.addFlashAttribute("mensaje", "Cantidad actualizada");
@@ -84,7 +84,7 @@ public class CarritoController {
      */
     @GetMapping("/eliminar/{idProducto}")
     public String eliminarProducto(@PathVariable Integer idProducto,
-                                    RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         try {
             carritoService.eliminarProducto(idProducto);
             redirectAttributes.addFlashAttribute("mensaje", "Producto eliminado del carrito");
@@ -110,6 +110,7 @@ public class CarritoController {
 
     /**
      * Proceder al checkout (redirige a la página de checkout)
+     * ACTUALIZADO: Ya no dice "implementar después"
      */
     @GetMapping("/checkout")
     public String checkout(RedirectAttributes redirectAttributes) {
@@ -122,13 +123,13 @@ public class CarritoController {
 
         // Verificar disponibilidad de productos
         if (!carritoService.verificarDisponibilidad()) {
-            redirectAttributes.addFlashAttribute("error", 
-                "Algunos productos no están disponibles. Por favor revisa tu carrito.");
+            redirectAttributes.addFlashAttribute("error",
+                    "Algunos productos no están disponibles. Por favor revisa tu carrito.");
             redirectAttributes.addFlashAttribute("tipo", "danger");
             return "redirect:/carrito";
         }
 
-        // Redirigir al checkout (implementar después)
+        // Redirigir al checkout (ahora sí implementado)
         return "redirect:/checkout";
     }
 }

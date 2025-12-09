@@ -440,8 +440,222 @@ article {
     border-radius: 15px;
     margin-right: 10px; }
 
+ .pedido-card {
+     transition: transform 0.2s;
+ }
 
+ .pedido-card:hover {
+     transform: translateY(-5px);
+ }
 
+ /* ===================================
+   ESTILOS PARA CHECKOUT Y CONFIRMACIÓN
+   =================================== */
+
+ /* Page Header */
+ .page-header {
+     background: linear-gradient(135deg, var(--coffee-brown) 0%, var(--dark-coffee) 100%);
+     color: white;
+     padding: 3rem 0;
+     margin-bottom: 2rem;
+ }
+
+ .page-title {
+     font-size: 2.5rem;
+     font-weight: bold;
+     margin-bottom: 0.5rem;
+ }
+
+ .page-subtitle {
+     font-size: 1.1rem;
+     opacity: 0.9;
+     margin-bottom: 0;
+ }
+
+ /* Cards */
+ .card {
+     border-radius: 15px;
+     transition: transform 0.2s, box-shadow 0.2s;
+ }
+
+ .card:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+ }
+
+ .card-header.bg-coffee {
+     background-color: var(--coffee-brown) !important;
+     border-radius: 15px 15px 0 0 !important;
+     padding: 1rem 1.5rem;
+ }
+
+ /* Formularios */
+ .form-label {
+     font-weight: 600;
+     color: var(--dark-coffee);
+     margin-bottom: 0.5rem;
+ }
+
+ .form-control,
+ .form-select {
+     border-radius: 10px;
+     border: 2px solid #e0e0e0;
+     padding: 0.75rem 1rem;
+     transition: all 0.3s;
+ }
+
+ .form-control:focus,
+ .form-select:focus {
+     border-color: var(--coffee-brown);
+     box-shadow: 0 0 0 0.2rem rgba(101, 67, 33, 0.25);
+ }
+
+ /* Método de pago */
+ .form-check {
+     cursor: pointer;
+ }
+
+ .form-check:hover {
+     background-color: #f8f9fa;
+ }
+
+ .form-check-input:checked {
+     background-color: var(--coffee-brown);
+     border-color: var(--coffee-brown);
+ }
+
+ /* Sticky sidebar */
+ .sticky-top {
+     position: sticky;
+     z-index: 1020;
+ }
+
+ /* Botones */
+ .btn-coffee {
+     background-color: var(--coffee-brown);
+     color: white;
+     border: none;
+     padding: 0.75rem 1.5rem;
+     border-radius: 10px;
+     font-weight: 600;
+     transition: all 0.3s;
+ }
+
+ .btn-coffee:hover {
+     background-color: var(--dark-coffee);
+     color: white;
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(101, 67, 33, 0.3);
+ }
+
+ .btn-outline-coffee {
+     color: var(--coffee-brown);
+     border: 2px solid var(--coffee-brown);
+     padding: 0.75rem 1.5rem;
+     border-radius: 10px;
+     font-weight: 600;
+     transition: all 0.3s;
+ }
+
+ .btn-outline-coffee:hover {
+     background-color: var(--coffee-brown);
+     color: white;
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(101, 67, 33, 0.3);
+ }
+
+ /* Texto coffee */
+ .text-coffee {
+     color: var(--coffee-brown);
+ }
+
+ /* Success Icon Animation */
+ .bi-check-circle-fill {
+     animation: checkAnimation 0.5s ease-in-out;
+ }
+
+ @keyframes checkAnimation {
+     0% {
+         transform: scale(0);
+         opacity: 0;
+     }
+
+     50% {
+         transform: scale(1.2);
+     }
+
+     100% {
+         transform: scale(1);
+         opacity: 1;
+     }
+ }
+
+ /* Tabla de productos */
+ .table {
+     margin-bottom: 0;
+ }
+
+ .table thead {
+     background-color: #f8f9fa;
+ }
+
+ .table tbody tr {
+     transition: background-color 0.2s;
+ }
+
+ .table tbody tr:hover {
+     background-color: #f8f9fa;
+ }
+
+ /* Badges personalizados */
+ .badge {
+     padding: 0.5rem 1rem;
+     font-weight: 600;
+     border-radius: 20px;
+ }
+
+ /* Alert personalizada */
+ .alert {
+     border-radius: 10px;
+     border: none;
+     padding: 1rem 1.5rem;
+ }
+
+ .alert i {
+     font-size: 1.2rem;
+     margin-right: 0.5rem;
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+     .page-header {
+         padding: 2rem 0;
+     }
+
+     .page-title {
+         font-size: 2rem;
+     }
+
+     .sticky-top {
+         position: relative;
+     }
+ }
+
+ /* Print styles */
+ @media print {
+
+     .btn,
+     .page-header,
+     nav,
+     footer {
+         display: none !important;
+     }
+
+     .card {
+         border: 1px solid #dee2e6;
+         box-shadow: none;
+     }
+ }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {

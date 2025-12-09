@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Mis Pedidos', null)}"
+>
+  <body>
+    <article>
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1 class="page-title">
+            <i class="bi bi-bag-check me-2"></i>Mis Pedidos
+          </h1>
+          <p class="page-subtitle">Historial de tus compras en Coffee Corner</p>
+        </div>
+      </section>
+
+      <section class="container py-5">
+        <!-- Alertas -->
+        <div th:if="${mensaje}" class="alert alert-dismissible fade show mb-4" 
+             th:classappend="${'alert-' + tipo}" role="alert">
+          <i class="bi" th:classappend="${tipo == 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'}"></i>
+          <span th:text="${mensaje}"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span th:text="${error}"></span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Sin pedidos -->
+        <div th:if="${ordenes == null or #lists.isEmpty(ordenes)}" class="text-center py-5">
+          <i class="bi bi-bag-x" style="font-size: 5rem; color: var(--medium-gray);"></i>
+          <h3 class="mt-4 text-muted">Aún no tienes pedidos</h3>
+          <p class="text-muted">¡Realiza tu primera compra!</p>
+          <a th:href="@{/menu}" class="btn btn-coffee mt-3">
+            <i class="bi bi-shop me-2"></i>Explorar Menú
+          </a>
+        </div>
+
+        <!-- Lista de pedidos -->
+        <div th:if="${ordenes != null and !#lists.isEmpty(ordenes)}">
+          
+          <!-- Filtros -->
+          <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h5 class="mb-0">
+                    <i class="bi bi-filter me-2"></i>
+                    Total de pedidos: <span class="text-coffee" th:text="${#lists.size(ordenes)}"></span>
+                  </h5>
+                </div>
+                <div class="col-md-4 text-end">
+                  <select class="form-select" id="filtroEstado">
+                    <option value="todos">Todos los estados</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Preparando">Preparando</option>
+                    <option value="Entregada">Entregada</option>
+                    <option value="Cancelada">Cancelada</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjetas de pedidos -->
+          <div class="row">
+            <div class="col-12 mb-4 pedido-card" 
+                 th:each="orden : ${ordenes}"
+                 th:data-estado="${orden.estado}">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                  <div class="row">
+                    <!-- Información principal -->
+                    <div class="col-md-8">
+                      <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                          <h5 class="mb-1">
+                            <i class="bi bi-receipt me-2"></i>
+                            Orden #<span th:text="${orden.idOrden}"></span>
+                          </h5>
+                          <small class="text-muted">
+                            <i class="bi bi-calendar3 me-1"></i>
+                            <span th:text="${#temporals.format(orden.fechaOrden, 'dd/MM/yyyy')}"></span>
+                          </small>
+                        </div>
+                        <span class="badge" 
+                              th:classappend="${orden.estado == 'Pendiente' ? 'bg-warning text-dark' : 
+                                             orden.estado == 'Preparando' ? 'bg-info' :
+                                             orden.estado == 'Entregada' ? 'bg-success' : 'bg-danger'}"
+                              th:text="${orden.estado}">
+                        </span>
+                      </div>
+
+                      <!-- Productos resumidos -->
+                      <div class="mb-3">
+                        <h6 class="text-muted mb-2">Productos:</h6>
+                        <div class="d-flex flex-wrap gap-2">
+                          <span th:each="detalle, iterStat : ${orden.detalles}" 
+                                class="badge bg-light text-dark border">
+                            <span th:text="${detalle.cantidad}"></span>x 
+                            <span th:text="${detalle.producto.nombre}"></span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Total -->
+                      <div>
+                        <h4 class="text-coffee mb-0">
+                          Total: ₡<span th:text="${#numbers.formatDecimal(orden.total, 1, 2)}"></span>
+                        </h4>
+                      </div>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                      <a th:href="@{/mis-pedidos/{id}(id=${orden.idOrden})}" 
+                         class="btn btn-outline-coffee mb-2 w-100">
+                        <i class="bi bi-eye me-2"></i>Ver Detalles
+                      </a>
+                      
+                      <button type="button" 
+                              class="btn btn-outline-secondary w-100 mb-2"
+                              onclick="window.print()">
+                        <i class="bi bi-printer me-2"></i>Imprimir
+                      </button>
+
+                      <!-- Botón de cancelar (solo para pendientes) -->
+                      <button th:if="${orden.estado == 'Pendiente'}" 
+                              type="button" 
+                              class="btn btn-outline-danger w-100"
+                              th:onclick="confirmarCancelacion([[${orden.idOrden}]])">
+                        <i class="bi bi-x-circle me-2"></i>Cancelar
+                      </button>
+
+                      <!-- Botón de reordenar -->
+                      <a th:if="${orden.estado == 'Entregada'}" 
+                         th:href="@{/menu}" 
+                         class="btn btn-coffee w-100">
+                        <i class="bi bi-arrow-repeat me-2"></i>Volver a Pedir
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+  </body>
+</html>

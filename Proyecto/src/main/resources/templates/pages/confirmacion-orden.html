@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Confirmación de Pedido', null)}"
+>
+  <body>
+    <article>
+      <section class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            
+            <!-- Mensaje de éxito -->
+            <div class="text-center mb-5">
+              <div class="mb-4">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+              </div>
+              <h1 class="text-success mb-3">¡Pedido Realizado con Éxito!</h1>
+              <p class="lead text-muted">
+                Gracias por tu compra. Tu pedido ha sido registrado correctamente.
+              </p>
+            </div>
+
+            <!-- Información de la orden -->
+            <div class="card shadow-sm border-0 mb-4">
+              <div class="card-header bg-coffee text-white">
+                <h5 class="mb-0">
+                  <i class="bi bi-receipt me-2"></i>Detalles del Pedido
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="mb-2">
+                      <strong>Número de Orden:</strong>
+                      <span class="text-coffee">#<span th:text="${orden.idOrden}"></span></span>
+                    </p>
+                    <p class="mb-2">
+                      <strong>Fecha:</strong>
+                      <span th:text="${#temporals.format(orden.fechaOrden, 'dd/MM/yyyy')}"></span>
+                    </p>
+                    <p class="mb-2">
+                      <strong>Estado:</strong>
+                      <span class="badge bg-warning text-dark" th:text="${orden.estado}"></span>
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-2">
+                      <strong>Cliente:</strong>
+                      <span th:text="${orden.usuario.nombre}"></span>
+                    </p>
+                    <p class="mb-2">
+                      <strong>Correo:</strong>
+                      <span th:text="${orden.usuario.correo}"></span>
+                    </p>
+                    <p class="mb-2">
+                      <strong>Teléfono:</strong>
+                      <span th:text="${orden.usuario.telefono}"></span>
+                    </p>
+                  </div>
+                </div>
+
+                <hr>
+
+                <!-- Productos del pedido -->
+                <h6 class="mb-3">Productos:</h6>
+                <div class="table-responsive">
+                  <table class="table table-sm">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Producto</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-end">Precio Unit.</th>
+                        <th class="text-end">Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="detalle : ${orden.detalles}">
+                        <td th:text="${detalle.producto.nombre}"></td>
+                        <td class="text-center" th:text="${detalle.cantidad}"></td>
+                        <td class="text-end">
+                          ₡<span th:text="${#numbers.formatDecimal(detalle.precioUnitario, 1, 2)}"></span>
+                        </td>
+                        <td class="text-end">
+                          ₡<span th:text="${#numbers.formatDecimal(detalle.subtotal, 1, 2)}"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="table-light">
+                      <tr>
+                        <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                        <td class="text-end">
+                          <strong class="text-coffee">
+                            ₡<span th:text="${#numbers.formatDecimal(orden.total, 1, 2)}"></span>
+                          </strong>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="alert alert-info">
+              <h6 class="alert-heading">
+                <i class="bi bi-info-circle me-2"></i>Información Importante
+              </h6>
+              <ul class="mb-0">
+                <li>Recibirás un correo electrónico con la confirmación de tu pedido</li>
+                <li>El tiempo estimado de preparación es de 15-30 minutos</li>
+                <li>Puedes revisar el estado de tu pedido en "Mis Pedidos"</li>
+                <li>Si tienes alguna pregunta, contáctanos al (123) 456-7890</li>
+              </ul>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="row g-3">
+              <div class="col-md-4">
+                <a th:href="@{/mis-pedidos}" class="btn btn-outline-coffee w-100">
+                  <i class="bi bi-bag-check me-2"></i>Ver Mis Pedidos
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a th:href="@{/menu}" class="btn btn-outline-coffee w-100">
+                  <i class="bi bi-shop me-2"></i>Seguir Comprando
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a th:href="@{/inicio}" class="btn btn-coffee w-100">
+                  <i class="bi bi-house me-2"></i>Volver al Inicio
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>

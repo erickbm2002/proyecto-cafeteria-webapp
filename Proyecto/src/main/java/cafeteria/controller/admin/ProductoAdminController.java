@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import cafeteria.Services.CategoriaServices;
+import cafeteria.Services.InventarioService;
 import cafeteria.Services.ProductoServices;
+import cafeteria.domain.Categoria;
 import cafeteria.domain.Producto;
 import jakarta.validation.Valid;
 
@@ -32,59 +34,93 @@ public class ProductoAdminController {
     @Autowired
     private CategoriaServices categoriaServices;
 
+    @Autowired
+    private InventarioService inventarioService;
+
     @GetMapping("/productos")
     public String productosAdmin(Model model) {
         var productosBd = productoServices.getProductos(false);
         var categoriasBd = categoriaServices.getCategorias(true);
+
         model.addAttribute("productos", productosBd);
         model.addAttribute("categorias", categoriasBd);
-        model.addAttribute("producto", new Producto()); // Para el formulario chicos
+        model.addAttribute("producto", new Producto());
+
         List<String> archivosCss = Arrays.asList("admin/admin_productos.css");
         model.addAttribute("archivos_css", archivosCss);
+
         return "pages/admin/productos";
     }
 
     @PostMapping("/productos/guardar")
-    public String guardarProducto(@Valid @ModelAttribute Producto producto, 
-                                   BindingResult result,
-                                   @RequestParam(value = "file", required = false) MultipartFile imagen,
-                                   RedirectAttributes redirectAttributes,
-                                   Model model) {
-        
-        if (result.hasErrors()) {
-            var productosBd = productoServices.getProductos(false);
-            var categoriasBd = categoriaServices.getCategorias(true);
-            model.addAttribute("productos", productosBd);
-            model.addAttribute("categorias", categoriasBd);
-            model.addAttribute("error", "Por favor corrige los errores en el formulario");
-            return "pages/admin/productos";
-        }
+    public String guardarProducto(@Valid @ModelAttribute Producto producto,
+            BindingResult result,
+            @RequestParam(value = "file", required = false) MultipartFile imagen,
+            @RequestParam(value = "categoriaId", required = false) Integer categoriaId,
+            RedirectAttributes redirectAttributes,
+            Model model) {
 
         try {
+            if (result.hasErrors()) {
+                redirectAttributes.addFlashAttribute("error", "Por favor corrige los errores");
+                redirectAttributes.addFlashAttribute("tipo", "danger");
+                return "redirect:/admin/administrar/productos";
+            }
+
+            if (categoriaId != null) {
+                Categoria categoria = categoriaServices.getCategoriaById(categoriaId);
+                producto.setCategoria(categoria);
+            }
+
+            if (producto.getCategoria() == null || producto.getCategoria().getIdCategoria() == null) {
+                redirectAttributes.addFlashAttribute("error", "Debes seleccionar una categoría");
+                redirectAttributes.addFlashAttribute("tipo", "danger");
+                return "redirect:/admin/administrar/productos";
+            }
+
             productoServices.save(producto, imagen);
+
+            if (producto.getIdProducto() != null) {
+                try {
+                    if (inventarioService.getInventarioByProductoId(producto.getIdProducto()) == null) {
+                        inventarioService.crearInventario(producto, 0);
+                    }
+                } catch (Exception e) {
+                    // Inventario ya existe
+                }
+            }
+
             redirectAttributes.addFlashAttribute("mensaje", "Producto guardado exitosamente");
             redirectAttributes.addFlashAttribute("tipo", "success");
+
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Error al guardar la imagen: " + e.getMessage());
             redirectAttributes.addFlashAttribute("tipo", "danger");
-            e.printStackTrace();
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al guardar el producto: " + e.getMessage());
             redirectAttributes.addFlashAttribute("tipo", "danger");
-            e.printStackTrace();
         }
-        
+
         return "redirect:/admin/administrar/productos";
     }
 
     @GetMapping("/productos/eliminar/{id}")
     public String eliminarProducto(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
+            try {
+                var inventario = inventarioService.getInventarioByProductoId(id);
+                if (inventario != null) {
+                    inventarioService.eliminarInventario(inventario.getIdInventario());
+                }
+            } catch (Exception e) {
+            }
+
             productoServices.delete(id);
+
             redirectAttributes.addFlashAttribute("mensaje", "Producto eliminado exitosamente");
             redirectAttributes.addFlashAttribute("tipo", "success");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error al eliminar el producto: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("tipo", "danger");
         }
         return "redirect:/admin/administrar/productos";
@@ -94,10 +130,10 @@ public class ProductoAdminController {
     public String toggleActivo(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             productoServices.toggleActivo(id);
-            redirectAttributes.addFlashAttribute("mensaje", "Estado actualizado exitosamente");
+            redirectAttributes.addFlashAttribute("mensaje", "Estado actualizado");
             redirectAttributes.addFlashAttribute("tipo", "success");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error al actualizar el estado: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("error", "Error al actualizar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("tipo", "danger");
         }
         return "redirect:/admin/administrar/productos";

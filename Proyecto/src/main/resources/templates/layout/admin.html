@@ -3,56 +3,11 @@
 <head th:replace="~{fragments/head :: head_principal(${archivos_css},'Admin')}"></head>
 <body class="container-fluided d-flex vh-100">
     <header th:replace="~{fragments/header_admin :: header_admin}"></header>
-    <main>
+    <main class="flex-grow-1 p-4">
         <th:block th:replace="${contenido}"></th:block>
     </main>
-    <script th:inline="javascript">
-    const productos = /*[[${productos}]]*/ [];
-    
-    function editarProducto(id) {
-      const producto = productos.find(p => p.idProducto == id);
-      if (!producto) return;
 
-      document.getElementById('modalProductoLabel').textContent = 'Editar Producto';
-      document.getElementById('idProducto').value = producto.idProducto;
-      document.getElementById('nombre').value = producto.nombre;
-      document.getElementById('descripcion').value = producto.descripcion || '';
-      document.getElementById('precio').value = producto.precio;
-      document.getElementById('categoria').value = producto.categoria.idCategoria;
-      document.getElementById('activo').checked = producto.activo;
-      document.getElementById('nombreImagenActual').value = producto.nombreImagen || '';
-      
-      if (producto.nombreImagen) {
-        document.getElementById('file').required = false;
-        document.getElementById('preview').src = '/img/' + producto.nombreImagen;
-        document.getElementById('imagePreview').style.display = 'block';
-      }
-    }
-
-    function previewImage(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('preview').src = e.target.result;
-          document.getElementById('imagePreview').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function confirmarEliminar(id, nombre) {
-      document.getElementById('nombreProductoEliminar').textContent = nombre;
-      document.getElementById('btnConfirmarEliminar').href = '/admin/administrar/productos/eliminar/' + id;
-    }
-
-    document.getElementById('modalProducto').addEventListener('hidden.bs.modal', function () {
-      document.getElementById('formProducto').reset();
-      document.getElementById('idProducto').value = '';
-      document.getElementById('modalProductoLabel').textContent = 'Agregar Producto';
-      document.getElementById('imagePreview').style.display = 'none';
-      document.getElementById('file').required = true;
-    });
-  </script>
-</body>
+    <!-- Scripts base -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
 </html>
