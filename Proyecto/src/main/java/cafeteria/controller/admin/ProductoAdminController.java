@@ -1,19 +1,13 @@
 package cafeteria.controller.admin;
 
 import java.io.IOException;
-<<<<<<< Updated upstream
-=======
 import java.util.Arrays;
 import java.util.List;
->>>>>>> Stashed changes
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< Updated upstream
-=======
 import org.springframework.validation.BindingResult;
->>>>>>> Stashed changes
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,13 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import cafeteria.Services.CategoriaServices;
 import cafeteria.Services.ProductoServices;
 import cafeteria.domain.Producto;
+import jakarta.validation.Valid;
 
-<<<<<<< Updated upstream
-import org.springframework.web.bind.annotation.PostMapping;
-
-
-=======
->>>>>>> Stashed changes
 @Controller
 @RequestMapping("/admin/administrar")
 public class ProductoAdminController {
