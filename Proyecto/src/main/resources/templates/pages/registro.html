@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html 
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Registro', null)}"
+>
+  <body>
+    <article>
+      <section class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0">
+              <div class="card-body p-5">
+                <!-- Logo/Título -->
+                <div class="text-center mb-4">
+                  <i class="fas fa-user-plus" style="font-size: 3rem; color: var(--coffee-brown);"></i>
+                  <h2 class="mt-3" style="color: var(--coffee-brown); font-weight: bold;">
+                    Crear Cuenta
+                  </h2>
+                  <p class="text-muted">Únete a Coffee Corner</p>
+                </div>
+
+                <!-- Mensajes de error -->
+                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  <span th:text="${error}"></span>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <!-- Formulario de Registro -->
+                <form th:action="@{/registro/guardar}" th:object="${usuario}" method="post">
+
+                  <!-- Nombre -->
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">
+                      <i class="bi bi-person me-2"></i>Nombre Completo *
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      th:field="*{nombre}"
+                      id="nombre"
+                      placeholder="Juan Pérez"
+                      required
+                      maxlength="50"
+                    />
+                  </div>
+
+                  <!-- Correo -->
+                  <div class="mb-3">
+                    <label for="correo" class="form-label">
+                      <i class="bi bi-envelope me-2"></i>Correo Electrónico *
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      th:field="*{correo}"
+                      id="correo"
+                      placeholder="tu@email.com"
+                      required
+                      maxlength="100"
+                    />
+                  </div>
+
+                  <!-- Teléfono -->
+                  <div class="mb-3">
+                    <label for="telefono" class="form-label">
+                      <i class="bi bi-telephone me-2"></i>Teléfono
+                    </label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      th:field="*{telefono}"
+                      id="telefono"
+                      placeholder="8888-8888"
+                      maxlength="25"
+                    />
+                  </div>
+
+                  <!-- Dirección -->
+                  <div class="mb-3">
+                    <label for="direccion" class="form-label">
+                      <i class="bi bi-house me-2"></i>Dirección
+                    </label>
+                    <textarea
+                      class="form-control"
+                      th:field="*{direccion}"
+                      id="direccion"
+                      rows="2"
+                      placeholder="Calle Principal, Casa #123"
+                    ></textarea>
+                  </div>
+
+                  <!-- Contraseña -->
+                  <div class="mb-3">
+                    <label for="password" class="form-label">
+                      <i class="bi bi-lock me-2"></i>Contraseña *
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      th:field="*{password}"
+                      id="password"
+                      placeholder="Mínimo 6 caracteres"
+                      required
+                      minlength="6"
+                    />
+                    <small class="form-text text-muted">
+                      La contraseña debe tener al menos 6 caracteres
+                    </small>
+                  </div>
+
+                  <!-- Confirmar Contraseña -->
+                  <div class="mb-4">
+                    <label for="confirmPassword" class="form-label">
+                      <i class="bi bi-lock-fill me-2"></i>Confirmar Contraseña *
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="Repite tu contraseña"
+                      required
+                      minlength="6"
+                    />
+                  </div>
+
+                  <!-- Botón de Registro -->
+                  <button type="submit" class="btn btn-coffee w-100 mb-3">
+                    <i class="bi bi-person-check me-2"></i>Crear Cuenta
+                  </button>
+
+                  <!-- Link a Login -->
+                  <div class="text-center">
+                    <p class="mb-0">
+                      ¿Ya tienes cuenta? 
+                      <a th:href="@{/login}" style="color: var(--coffee-brown); font-weight: bold;">
+                        Inicia sesión aquí
+                      </a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
