@@ -127,7 +127,18 @@ INSERT INTO descuento (id_producto, porcentaje, fecha_inicio, fecha_fin) VALUES
 
 
 -- Inserción de Inventario
-INSERT INTO inventario (id_producto, cantidad_actual) VALUES
+INSERT INTO inventario (id_producto, cantidad_actual, fecha_actualizacion)
+SELECT 
+    p.id_producto,
+    10,  -- Cantidad inicial de 100 unidades
+    CURRENT_TIMESTAMP
+FROM producto p
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM inventario i 
+    WHERE i.id_producto = p.id_producto
+);
+
 
 
 -- Inserción de Factura
