@@ -24,15 +24,21 @@ public class SecurityConfig {
                 .requestMatchers("/", "/inicio", "/menu", "/contacto", "/galeria").permitAll()
                 .requestMatchers("/contacto/enviar").permitAll()
                 .requestMatchers("/registro", "/registro/guardar").permitAll()
+                .requestMatchers("/login", "/logout").permitAll()
+                .requestMatchers("/error").permitAll()
+                
+                // Carrito - público para facilitar compras
+                .requestMatchers("/carrito/**").permitAll()
                 
                 // Recursos estáticos públicos
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
+                .requestMatchers("/favicon.ico").permitAll()
                 
                 // Rutas de administrador - solo para usuarios con rol Administrador
                 .requestMatchers("/admin/**").hasAuthority("Administrador")
                 
                 // Rutas de cliente - para usuarios autenticados (Cliente o Administrador)
-                .requestMatchers("/mis-pedidos/**", "/perfil/**").authenticated()
+                .requestMatchers("/mis-pedidos/**", "/perfil/**", "/checkout/**").authenticated()
                 
                 // Cualquier otra ruta requiere autenticación
                 .anyRequest().authenticated()
@@ -53,6 +59,9 @@ public class SecurityConfig {
             )
             .exceptionHandling(exception -> exception
                 .accessDeniedPage("/acceso-denegado")
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/carrito/**") // Deshabilitar CSRF solo para carrito si es necesario
             );
 
         return http.build();
@@ -60,7 +69,8 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        // Sin encriptación - contraseñas en texto plano
+        return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 
     @Bean

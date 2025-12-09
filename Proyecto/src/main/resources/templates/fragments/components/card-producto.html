@@ -1,7 +1,8 @@
+
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
     <div class="row" th:fragment="card_producto(productos)">
-      <!-- Product 1 -->
+      <!-- Tarjeta de Producto -->
       <div
         th:each="prdto : ${productos}"
         class="col-lg-4 col-md-6 mb-4"
@@ -10,33 +11,70 @@
         <div class="menu-card">
           <div class="position-relative">
             <img
-              th:src="@{/img/} + ${prdto.nombreImagen}"
+              th:src="@{'/img/' + ${prdto.nombreImagen}}"
               class="menu-img"
-              thalt="${prdto.nombreImagen}"
+              th:alt="${prdto.nombre}"
             />
             <span class="popular-badge">Popular</span>
           </div>
           <div class="menu-content">
             <h3 class="menu-title">[[${prdto.nombre}]]</h3>
             <p class="menu-desc">[[${prdto.descripcion}]]</p>
-            <div class="menu-price">[[${prdto.precio}]]</div>
+            <div class="menu-price">₡[[${#numbers.formatDecimal(prdto.precio, 1, 2)}]]</div>
+            
+            <!-- Controles de cantidad -->
             <div class="quantity-controls">
-              <button class="quantity-btn minus-btn">-</button>
+              <button class="quantity-btn minus-btn" type="button">-</button>
               <span class="quantity-display">1</span>
-              <button class="quantity-btn plus-btn">+</button>
+              <button class="quantity-btn plus-btn" type="button">+</button>
             </div>
+            
+            <!-- Formulario para agregar al carrito -->
             <form th:action="@{/carrito/agregar}" method="post" class="d-inline">
-  <input type="hidden" name="idProducto" th:value="${producto.idProducto}" />
-  <input type="hidden" name="cantidad" class="cantidad-producto" value="1" />
-  <input type="hidden" name="origen" value="/menu" />
-  
-  <button type="submit" class="btn btn-add-cart">
-    <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
-  </button>
-</form>
+              <input type="hidden" name="idProducto" th:value="${prdto.idProducto}" />
+              <input type="hidden" name="cantidad" class="cantidad-producto" value="1" />
+              <input type="hidden" name="origen" value="/menu" />
+              
+              <button type="submit" class="btn btn-add-cart">
+                <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Script para manejar cantidad -->
+    <script th:inline="javascript">
+      $(document).ready(function() {
+        // Incrementar cantidad
+        $(".plus-btn").click(function() {
+          const display = $(this).siblings(".quantity-display");
+          let quantity = parseInt(display.text());
+          display.text(quantity + 1);
+        });
+
+        // Decrementar cantidad
+        $(".minus-btn").click(function() {
+          const display = $(this).siblings(".quantity-display");
+          let quantity = parseInt(display.text());
+          if (quantity > 1) {
+            display.text(quantity - 1);
+          }
+        });
+
+        // Antes de enviar el formulario, capturar la cantidad
+        $("form").on("submit", function(e) {
+          const card = $(this).closest(".menu-card");
+          const cantidad = parseInt(card.find(".quantity-display").text()) || 1;
+          $(this).find('.cantidad-producto').val(cantidad);
+          
+          // Reset quantity display después de agregar
+          setTimeout(function() {
+            card.find(".quantity-display").text("1");
+          }, 100);
+        });
+      });
+    </script>
   </body>
 </html>

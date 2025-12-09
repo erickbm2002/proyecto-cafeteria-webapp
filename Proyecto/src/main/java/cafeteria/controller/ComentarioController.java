@@ -1,5 +1,8 @@
 package cafeteria.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +26,8 @@ public class ComentarioController {
 
     @GetMapping
     public String mostrarContacto(Model model) {
-        
+        List<String> archivosCss = Arrays.asList("formulario.css");
+        model.addAttribute("archivos_css", archivosCss);
         model.addAttribute("comentario", new Comentario());
         return "pages/contacto";
     }

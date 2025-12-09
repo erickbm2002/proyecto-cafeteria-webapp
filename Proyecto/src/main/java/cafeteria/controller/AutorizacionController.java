@@ -16,7 +16,7 @@ import cafeteria.domain.Usuario;
 import jakarta.validation.Valid;
 
 @Controller
-public class AuthorizacionController {
+public class AutorizacionController {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -78,8 +78,8 @@ public class AuthorizacionController {
         }
 
         try {
-            // Encriptar la contraseña
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            // NO encriptar la contraseña - guardar en texto plano
+            // usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             
             // Establecer rol por defecto como Cliente
             usuario.setRol(Usuario.Rol.Cliente);
