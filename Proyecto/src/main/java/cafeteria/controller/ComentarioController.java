@@ -23,6 +23,7 @@ public class ComentarioController {
 
     @GetMapping
     public String mostrarContacto(Model model) {
+        
         model.addAttribute("comentario", new Comentario());
         return "pages/contacto";
     }

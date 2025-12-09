@@ -80,21 +80,14 @@
           }
         });
 
-        // Add to cart functionality
-        $(".btn-add-cart").click(function () {
-          const card = $(this).closest(".menu-card");
-          const productName = card.find(".menu-title").text();
-          const quantity = card.find(".quantity-display").text();
-          const price = card.find(".menu-price").text();
-
-          // Reset quantity
-          card.find(".quantity-display").text("1");
-
-          // Show confirmation (you can replace this with actual cart functionality)
-          alert(
-            `¡Agregado al carrito!\n${quantity} x ${productName}\nTotal: ${price}`
-          );
-        });
+        $(".btn-add-cart").closest('form').on('submit', function(e) {
+    const card = $(this).closest(".menu-card");
+    const cantidad = parseInt(card.find(".quantity-display").text()) || 1;
+    $(this).find('.cantidad-producto').val(cantidad);
+    
+    // Reset quantity display después de agregar
+    card.find(".quantity-display").text("1");
+  });
       });
     </script> 
   </body>

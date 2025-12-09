@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/public :: layout_public(~{::article}, 'Acceso Denegado', null)}"
+>
+  <body>
+    <article>
+      <section class="container py-5 text-center">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <i class="bi bi-shield-exclamation" style="font-size: 5rem; color: var(--coffee-brown);"></i>
+            <h1 class="mt-4" style="color: var(--coffee-brown); font-weight: bold;">
+              Acceso Denegado
+            </h1>
+            <p class="lead text-muted mt-3">
+              No tienes permisos para acceder a esta página.
+            </p>
+            <p class="text-muted">
+              Si crees que esto es un error, por favor contacta al administrador.
+            </p>
+            <div class="mt-4">
+              <a th:href="@{/inicio}" class="btn btn-coffee me-2">
+                <i class="bi bi-house-door me-2"></i>Volver al Inicio
+              </a>
+              <a th:href="@{/login}" class="btn btn-outline-secondary">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
