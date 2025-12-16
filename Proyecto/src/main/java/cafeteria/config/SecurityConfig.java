@@ -27,17 +27,17 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/logout").permitAll()
                         .requestMatchers("/error").permitAll()
 
-                        // Carrito - público para facilitar compras (pero checkout requiere login)
+
                         .requestMatchers("/carrito", "/carrito/**").permitAll()
 
                         // Recursos estáticos públicos
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
 
-                        // Rutas de administrador - solo para usuarios con rol Administrador
+    
                         .requestMatchers("/admin/**").hasAuthority("Administrador")
 
-                        // RUTAS DE CHECKOUT Y PEDIDOS - Requieren autenticación
+                        // RUTAS DE CHECKOUT Y PEDIDOS 
                         .requestMatchers("/checkout", "/checkout/**").authenticated()
                         .requestMatchers("/mis-pedidos", "/mis-pedidos/**").authenticated()
                         .requestMatchers("/perfil", "/perfil/**").authenticated()
@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception
                         .accessDeniedPage("/acceso-denegado"))
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/carrito/**") // Deshabilitar CSRF solo para carrito si es necesario
+                        .ignoringRequestMatchers("/carrito/**") 
                 );
 
         return http.build();
@@ -67,7 +67,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Sin encriptación - contraseñas en texto plano
+        /// Quitamos la encriptacion por problemas que teniamos en la base de daytos
         return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 

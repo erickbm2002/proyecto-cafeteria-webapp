@@ -42,7 +42,7 @@ CREATE TABLE producto (
 
 -- Tabla de usuarios
 CREATE TABLE usuario (
-  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario INT AUTO_INCREMENT PRIMARY KEY,                                                                                                                                                                                                                                                                                                                                                                                                         nmmmmmmmmmmmmmmmmmmbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
   nombre VARCHAR(50) NOT NULL,
   correo VARCHAR(100) UNIQUE,
   telefono VARCHAR(25),

@@ -6,10 +6,6 @@ import java.math.BigDecimal;
 
 import lombok.Data;
 
-/**
- * Clase auxiliar para manejar items en el carrito de compras
- * No es una entidad de BD, solo se usa en la sesión
- */
 @Data
 public class ItemCarrito implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,16 +19,13 @@ public class ItemCarrito implements Serializable {
     private String nombreCategoria;
     private boolean tieneDescuento;
 
-    // Referencia al producto completo (necesaria para crear DetalleOrden)
     private Producto producto;
 
-    // Constructor vacío
     public ItemCarrito() {
     }
 
-    // Constructor con producto
     public ItemCarrito(Producto producto, Integer cantidad) {
-        this.producto = producto; // IMPORTANTE: Guardar referencia al producto completo
+        this.producto = producto; 
         this.idProducto = producto.getIdProducto();
         this.nombre = producto.getNombre();
         this.precio = producto.getPrecio();
@@ -40,7 +33,6 @@ public class ItemCarrito implements Serializable {
         this.nombreImagen = producto.getNombreImagen();
         this.nombreCategoria = producto.getCategoria() != null ? producto.getCategoria().getNombre() : "";
 
-        // Verificar si tiene descuento
         BigDecimal precioConDesc = producto.getPrecioConDescuento();
         if (precioConDesc != null && precioConDesc.compareTo(producto.getPrecio()) < 0) {
             this.precioConDescuento = precioConDesc;

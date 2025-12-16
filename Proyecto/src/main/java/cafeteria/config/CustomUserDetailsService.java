@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Usuario usuario) {
-        // Convertir el rol del usuario a una autoridad de Spring Security
+        // Acá lo que stamos haceindo ees convertir el rol del usuario a una autoridad de Spring Security
         return Collections.singletonList(new SimpleGrantedAuthority(usuario.getRol().name()));
     }
 }

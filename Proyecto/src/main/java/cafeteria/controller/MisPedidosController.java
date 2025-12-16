@@ -42,11 +42,11 @@ public class MisPedidosController {
         }
 
         try {
-            // Obtener usuario
+
             String correo = authentication.getName();
             Usuario usuario = usuarioService.getUsuarioByCorreo(correo);
 
-            // Obtener órdenes del usuario
+
             List<Orden> ordenes = ordenService.getOrdenesByUsuario(usuario);
 
             model.addAttribute("ordenes", ordenes);
@@ -59,16 +59,13 @@ public class MisPedidosController {
         }
     }
 
-    /**
-     * Ver detalle de un pedido específico
-     */
+
     @GetMapping("/{id}")
     public String verDetallePedido(@PathVariable Integer id,
             Authentication authentication,
             Model model,
             RedirectAttributes redirectAttributes) {
 
-        // Verificar autenticación
         if (authentication == null || !authentication.isAuthenticated()) {
             redirectAttributes.addFlashAttribute("error",
                     "Debes iniciar sesión para ver este pedido");
@@ -76,14 +73,14 @@ public class MisPedidosController {
         }
 
         try {
-            // Obtener usuario
+ 
             String correo = authentication.getName();
             Usuario usuario = usuarioService.getUsuarioByCorreo(correo);
 
-            // Obtener la orden
+
             Orden orden = ordenService.getOrdenById(id);
 
-            // Verificar que la orden pertenezca al usuario
+
             if (!orden.getUsuario().getIdUsuario().equals(usuario.getIdUsuario())) {
                 redirectAttributes.addFlashAttribute("error",
                         "No tienes permiso para ver este pedido");
