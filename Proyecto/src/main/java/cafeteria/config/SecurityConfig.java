@@ -28,7 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/error").permitAll()
 
 
-                        .requestMatchers("/carrito", "/carrito/**").permitAll()
+                        .requestMatchers("/carrito", "/carrito/**").authenticated()
 
                         // Recursos estáticos públicos
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()

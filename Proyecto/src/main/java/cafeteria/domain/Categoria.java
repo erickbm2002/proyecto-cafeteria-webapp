@@ -8,6 +8,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -18,9 +20,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) 
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
@@ -29,6 +33,7 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")
+    @EqualsAndHashCode.Include 
     private Integer idCategoria;
 
     @Column(unique = true, nullable = false, length = 50)
@@ -37,7 +42,7 @@ public class Categoria implements Serializable {
 
     private Boolean activo = true;
 
-  @Column(name = "fecha_creacion", updatable = false)
+    @Column(name = "fecha_creacion", updatable = false)
     @CreatedDate
     private LocalDateTime fechaCreacion;
 
@@ -46,9 +51,8 @@ public class Categoria implements Serializable {
     private LocalDateTime fechaModificacion;
 
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnore
     private List<Producto> productos;
-
-    
 
     // Método auxiliar para contar productos activos
     public long getProductosActivosCount() {
@@ -56,7 +60,7 @@ public class Categoria implements Serializable {
             return 0;
         }
         return productos.stream()
-            .filter(p -> p.getActivo() != null && p.getActivo())
-            .count();
+                .filter(p -> p.getActivo() != null && p.getActivo())
+                .count();
     }
 }

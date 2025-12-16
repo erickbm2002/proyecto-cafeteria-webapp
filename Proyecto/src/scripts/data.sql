@@ -110,22 +110,6 @@ VALUES
 ('Stephania Rojas', 'stephannia.cliente@gmail.com
 ', '5555-5555', 'Heredia', 'Cliente', TRUE, 'cliente123')
 
--- Inserción de Orden
-INSERT INTO orden (id_usuario, fecha_orden, estado, total) VALUES
-
-
--- Inserción de Detalle de orden
-INSERT INTO detalle_orden (id_orden, id_producto, cantidad, precio_unitario) VALUES
-
-
--- Inserción de Promoción
-INSERT INTO promocion (titulo, descripcion, fecha_inicio, fecha_fin) VALUES
-
-
--- Inserción de Descuento
-INSERT INTO descuento (id_producto, porcentaje, fecha_inicio, fecha_fin) VALUES
-
-
 -- Inserción de Inventario
 INSERT INTO inventario (id_producto, cantidad_actual, fecha_actualizacion)
 SELECT 
@@ -138,15 +122,6 @@ WHERE NOT EXISTS (
     FROM inventario i 
     WHERE i.id_producto = p.id_producto
 );
-
-
-
--- Inserción de Factura
-INSERT INTO factura (id_orden, fecha_emision, monto_total, estado) VALUES
-
-
--- Inserción de Transacción
-INSERT INTO transaccion (id_factura, monto, metodo_pago, estado) VALUES
 
 
 

@@ -9,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,18 +26,20 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @EntityListeners(AuditingEntityListener.class)
-
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // 
 @Entity
 @Table(name = "producto")
-public class Producto implements Serializable{
+public class Producto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
+    @EqualsAndHashCode.Include // ←
     private Integer idProducto;
 
     @Column(unique = true, nullable = false, length = 50)
@@ -67,12 +71,15 @@ public class Producto implements Serializable{
     private Categoria categoria;
 
     @OneToMany(mappedBy = "producto")
+    @JsonIgnore
     private List<DetalleOrden> detallesOrden;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Descuento> descuentos;
 
     @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Inventario inventario;
 
     // Método auxiliar para obtener el descuento vigente
@@ -81,9 +88,9 @@ public class Producto implements Serializable{
             return null;
         }
         return descuentos.stream()
-            .filter(Descuento::isVigente)
-            .findFirst()
-            .orElse(null);
+                .filter(Descuento::isVigente)
+                .findFirst()
+                .orElse(null);
     }
 
     // Método auxiliar para obtener el precio con descuento
