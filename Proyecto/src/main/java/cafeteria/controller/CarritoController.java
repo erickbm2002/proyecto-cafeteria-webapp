@@ -20,10 +20,6 @@ public class CarritoController {
 
     @Autowired
     private CarritoService carritoService;
-
-    /**
-     * Mostrar el carrito de compras
-     */
     @GetMapping
     public String verCarrito(Model model) {
         model.addAttribute("items", carritoService.getItems());
@@ -36,9 +32,6 @@ public class CarritoController {
         return "pages/carrito";
     }
 
-    /**
-     * Agregar producto al carrito
-     */
     @PostMapping("/agregar")
     public String agregarProducto(@RequestParam Integer idProducto,
             @RequestParam(defaultValue = "1") Integer cantidad,
@@ -53,16 +46,12 @@ public class CarritoController {
             redirectAttributes.addFlashAttribute("tipo", "danger");
         }
 
-        // Redirigir al origen o al menú por defecto
         if (origen != null && !origen.isEmpty()) {
             return "redirect:" + origen;
         }
         return "redirect:/menu";
     }
 
-    /**
-     * Actualizar cantidad de un producto en el carrito
-     */
     @PostMapping("/actualizar/{idProducto}")
     public String actualizarCantidad(@PathVariable Integer idProducto,
             @RequestParam Integer cantidad,
@@ -79,9 +68,7 @@ public class CarritoController {
         return "redirect:/carrito";
     }
 
-    /**
-     * Eliminar producto del carrito
-     */
+
     @GetMapping("/eliminar/{idProducto}")
     public String eliminarProducto(@PathVariable Integer idProducto,
             RedirectAttributes redirectAttributes) {
@@ -97,9 +84,6 @@ public class CarritoController {
         return "redirect:/carrito";
     }
 
-    /**
-     * Vaciar el carrito completamente
-     */
     @PostMapping("/vaciar")
     public String vaciarCarrito(RedirectAttributes redirectAttributes) {
         carritoService.vaciarCarrito();
@@ -108,28 +92,21 @@ public class CarritoController {
         return "redirect:/carrito";
     }
 
-    /**
-     * Proceder al checkout (redirige a la página de checkout)
-     * ACTUALIZADO: Ya no dice "implementar después"
-     */
     @GetMapping("/checkout")
     public String checkout(RedirectAttributes redirectAttributes) {
-        // Verificar que el carrito no esté vacío
+
         if (carritoService.estaVacio()) {
             redirectAttributes.addFlashAttribute("error", "El carrito está vacío");
             redirectAttributes.addFlashAttribute("tipo", "warning");
             return "redirect:/carrito";
         }
 
-        // Verificar disponibilidad de productos
         if (!carritoService.verificarDisponibilidad()) {
             redirectAttributes.addFlashAttribute("error",
                     "Algunos productos no están disponibles. Por favor revisa tu carrito.");
             redirectAttributes.addFlashAttribute("tipo", "danger");
             return "redirect:/carrito";
         }
-
-        // Redirigir al checkout (ahora sí implementado)
         return "redirect:/checkout";
     }
 }

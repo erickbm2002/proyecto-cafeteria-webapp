@@ -78,14 +78,11 @@ public class AutorizacionController {
         }
 
         try {
-            // NO encriptar la contraseña - guardar en texto plano
-            // usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-            
+
             // Establecer rol por defecto como Cliente
             usuario.setRol(Usuario.Rol.Cliente);
             usuario.setActivo(true);
             
-            // Guardar usuario
             usuarioService.save(usuario);
             
             redirectAttributes.addFlashAttribute("mensaje", "¡Registro exitoso! Ya puedes iniciar sesión");

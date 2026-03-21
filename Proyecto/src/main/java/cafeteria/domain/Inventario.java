@@ -3,6 +3,8 @@ package cafeteria.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +16,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) 
 @Entity
 @Table(name = "inventario")
 public class Inventario implements Serializable {
@@ -24,11 +28,13 @@ public class Inventario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inventario")
+    @EqualsAndHashCode.Include // 
     private Integer idInventario;
 
     @OneToOne
     @JoinColumn(name = "id_producto", nullable = false, unique = true)
     @NotNull(message = "El producto es requerido")
+    @JsonIgnore
     private Producto producto;
 
     @Column(name = "cantidad_actual", nullable = false)
@@ -46,7 +52,8 @@ public class Inventario implements Serializable {
     // Método auxiliar para decrementar stock
     public void decrementarStock(int cantidad) {
         if (cantidad > cantidadActual) {
-            throw new RuntimeException("Stock insuficiente. Disponible: " + cantidadActual + ", Requerido: " + cantidad);
+            throw new RuntimeException(
+                    "Stock insuficiente. Disponible: " + cantidadActual + ", Requerido: " + cantidad);
         }
         this.cantidadActual -= cantidad;
         this.fechaActualizacion = LocalDateTime.now();

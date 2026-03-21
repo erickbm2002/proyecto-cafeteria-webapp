@@ -16,7 +16,7 @@ import org.springframework.web.servlet.LocaleResolver;
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
 
-    //Permite configurar el acceso de plantillas para Thymeleaf
+    // configuramos el acceso de plantillas para Thymeleaf
     @Bean
     public SpringResourceTemplateResolver templateResolver_0() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
@@ -28,7 +28,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return resolver;
     }
     
-    //Permite configurar el locale idioma de la aplicación (Internacionalización i18N)
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -38,7 +37,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return slr;
     }
     
-    //Permite cambiar el idioma mediante el parámetro "lang" en las URLs dinamicamnente
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
@@ -46,13 +44,10 @@ public class ProjectConfig implements WebMvcConfigurer {
         return lci;
     }
 
-    //permite registrar el interceptor de cambio de idioma en la aplicación
     @Override
     public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
     }
-
-    //Permite configurar el origen de los mensajes para la internacionalización
     @Bean("messageSource")
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

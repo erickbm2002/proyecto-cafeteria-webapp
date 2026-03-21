@@ -1,7 +1,5 @@
 package cafeteria.controller;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +35,7 @@ public class CheckoutController {
     @Autowired
     private UsuarioService usuarioService;
 
-    /**
-     * Mostrar página de checkout
-     */
+
     @GetMapping
     public String mostrarCheckout(Authentication authentication,
             Model model,
@@ -68,7 +64,6 @@ public class CheckoutController {
             return "redirect:/carrito";
         }
 
-        // Obtener usuario
         String correo = authentication.getName();
         Usuario usuario = usuarioService.getUsuarioByCorreo(correo);
 
@@ -83,9 +78,7 @@ public class CheckoutController {
         return "pages/checkout";
     }
 
-    /**
-     * Procesar el pago y crear la orden
-     */
+
     @PostMapping("/procesar")
     public String procesarPago(Authentication authentication,
             @RequestParam String metodoPago,
@@ -128,13 +121,10 @@ public class CheckoutController {
                 detalles.add(detalle);
             }
 
-            // Crear la orden (esto decrementará automáticamente el inventario)
             Orden orden = ordenService.crearOrden(usuario, detalles);
 
-            // Vaciar el carrito después de crear la orden exitosamente
             carritoService.vaciarCarrito();
 
-            // Redirigir a página de confirmación
             redirectAttributes.addFlashAttribute("mensaje",
                     "¡Pedido realizado exitosamente! Número de orden: " + orden.getIdOrden());
             redirectAttributes.addFlashAttribute("tipo", "success");
@@ -150,9 +140,6 @@ public class CheckoutController {
         }
     }
 
-    /**
-     * Página de confirmación de orden
-     */
     @GetMapping("/confirmacion/{idOrden}")
     public String confirmacion(@PathVariable Integer idOrden,
             Authentication authentication,
